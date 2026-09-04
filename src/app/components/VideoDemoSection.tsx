@@ -29,7 +29,8 @@ export default function VideoDemoSection() {
             See Ownstay in action.
           </h2>
           <p className="text-[#9B9B9B] text-lg max-w-2xl mx-auto">
-            Experience how an AI receptionist can transform hotel guest communication — from first question to resolved request.
+            Experience how an AI receptionist can transform hotel guest communication — from first
+            question to resolved request.
           </p>
         </div>
 
@@ -37,7 +38,6 @@ export default function VideoDemoSection() {
         <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#1A1A1A]">
           {/* Aspect ratio wrapper */}
           <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-
             {/* Placeholder thumbnail / overlay */}
             {!isPlaying && (
               <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#1A1A1A] via-[#1F1F1F] to-[#111111] z-10">
@@ -68,8 +68,17 @@ export default function VideoDemoSection() {
                   {/* Ownstay logo mark */}
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-10 h-10 rounded-xl bg-[#FF6B35] flex items-center justify-center">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="white"/>
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"
+                          fill="white"
+                        />
                       </svg>
                     </div>
                     <span className="text-white font-semibold text-lg">Ownstay</span>
@@ -137,7 +146,12 @@ export default function VideoDemoSection() {
           >
             Book a Demo
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
             </svg>
           </a>
         </div>

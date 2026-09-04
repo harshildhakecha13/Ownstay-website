@@ -7,15 +7,22 @@ export default function AiHumanSection() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left */}
           <div>
-            <p className="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Philosophy</p>
-            <h2 id="ai-human-heading" className="text-section-xl font-bold text-white tracking-tight mb-5">
+            <p className="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">
+              Philosophy
+            </p>
+            <h2
+              id="ai-human-heading"
+              className="text-section-xl font-bold text-white tracking-tight mb-5"
+            >
               AI handles the repetitive.{' '}
               <span className="font-display italic text-gradient-orange">
                 Your team handles the exceptional.
               </span>
             </h2>
             <p className="text-base text-white/60 leading-relaxed max-w-lg">
-              Ownstay takes care of routine conversations so your team can spend more time creating memorable guest experiences. The AI and your staff work together — not against each other.
+              Ownstay takes care of routine conversations so your team can spend more time creating
+              memorable guest experiences. The AI and your staff work together — not against each
+              other.
             </p>
           </div>
 
@@ -73,7 +80,8 @@ export default function AiHumanSection() {
                 <Icon name="ArrowsRightLeftIcon" size={18} className="text-primary-foreground" />
               </div>
               <p className="text-sm text-white/80 leading-relaxed">
-                When a guest needs human attention, Ownstay escalates seamlessly to your team — with full context.
+                When a guest needs human attention, Ownstay escalates seamlessly to your team — with
+                full context.
               </p>
             </div>
           </div>

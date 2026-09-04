@@ -1,7 +1,19 @@
 import type { MetadataRoute } from 'next';
 
+function getBaseUrl(): string {
+  const envUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  if (envUrl && (envUrl.startsWith('http://') || envUrl.startsWith('https://'))) {
+    try {
+      return new URL(envUrl).origin;
+    } catch {
+      // fallback below
+    }
+  }
+  return 'http://localhost:3000';
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const baseUrl = getBaseUrl();
 
   return [
     {

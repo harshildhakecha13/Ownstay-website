@@ -1,0 +1,6 @@
+{
+  "name": "Ownstay",
+  "description": "AI Receptionist for Modern Hotels - Multilingual 24/7 guest communication and hotel operations platform",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -23,10 +23,23 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+function getBaseUrl(): URL {
+  const envUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  if (envUrl && (envUrl.startsWith('http://') || envUrl.startsWith('https://'))) {
+    try {
+      return new URL(envUrl);
+    } catch {
+      // fallback below
+    }
+  }
+  return new URL('http://localhost:3000');
+}
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  metadataBase: getBaseUrl(),
   title: 'Ownstay — AI Receptionist for Modern Hotels',
-  description: 'Ownstay is an AI receptionist for hotels that answers guest questions, handles requests, and delivers 24/7 multilingual guest support.',
+  description:
+    'Ownstay is an AI receptionist for hotels that answers guest questions, handles requests, and delivers 24/7 multilingual guest support.',
   openGraph: {
     title: 'Ownstay — AI Receptionist for Hotels',
     description: 'Answer guests 24/7 with AI built for hospitality.',
@@ -48,11 +61,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${manrope.variable} ${fraunces.variable}`}>
-      <body className={manrope.className}>
-        {children}
-
-        <script type="module" async src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fownstay5139back.builtwithrocket.new&_be=https%3A%2F%2Fappanalytics.rocket.new&_v=0.1.20" />
-        <script type="module" defer src="https://static.rocket.new/rocket-shot.js?v=0.0.2" /></body>
+      <body className={manrope.className}>{children}</body>
     </html>
   );
 }

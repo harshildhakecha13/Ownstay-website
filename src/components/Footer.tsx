@@ -72,11 +72,16 @@ export default function Footer() {
 
           {/* Product */}
           <div className="col-span-1">
-            <p className="text-xs font-bold tracking-widest uppercase text-muted-foreground mb-4">Product</p>
+            <p className="text-xs font-bold tracking-widest uppercase text-muted-foreground mb-4">
+              Product
+            </p>
             <ul className="space-y-3">
               {footerLinks?.product?.map((link) => (
                 <li key={link?.label}>
-                  <Link href={link?.href} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                  <Link
+                    href={link?.href}
+                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  >
                     {link?.label}
                   </Link>
                 </li>
@@ -86,11 +91,16 @@ export default function Footer() {
 
           {/* Company */}
           <div className="col-span-1">
-            <p className="text-xs font-bold tracking-widest uppercase text-muted-foreground mb-4">Company</p>
+            <p className="text-xs font-bold tracking-widest uppercase text-muted-foreground mb-4">
+              Company
+            </p>
             <ul className="space-y-3">
               {footerLinks?.company?.map((link) => (
                 <li key={link?.label}>
-                  <Link href={link?.href} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                  <Link
+                    href={link?.href}
+                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  >
                     {link?.label}
                   </Link>
                 </li>
@@ -100,11 +110,16 @@ export default function Footer() {
 
           {/* Resources */}
           <div className="col-span-1">
-            <p className="text-xs font-bold tracking-widest uppercase text-muted-foreground mb-4">Resources</p>
+            <p className="text-xs font-bold tracking-widest uppercase text-muted-foreground mb-4">
+              Resources
+            </p>
             <ul className="space-y-3">
               {footerLinks?.resources?.map((link) => (
                 <li key={link?.label}>
-                  <Link href={link?.href} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                  <Link
+                    href={link?.href}
+                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  >
                     {link?.label}
                   </Link>
                 </li>
@@ -114,11 +129,16 @@ export default function Footer() {
 
           {/* Legal */}
           <div className="col-span-1">
-            <p className="text-xs font-bold tracking-widest uppercase text-muted-foreground mb-4">Legal</p>
+            <p className="text-xs font-bold tracking-widest uppercase text-muted-foreground mb-4">
+              Legal
+            </p>
             <ul className="space-y-3">
               {footerLinks?.legal?.map((link) => (
                 <li key={link?.label}>
-                  <Link href={link?.href} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                  <Link
+                    href={link?.href}
+                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  >
                     {link?.label}
                   </Link>
                 </li>
@@ -129,14 +149,18 @@ export default function Footer() {
 
         {/* Bottom Row */}
         <div className="border-t border-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">
-            © 2026 Ownthum AI. All rights reserved.
-          </p>
+          <p className="text-sm text-muted-foreground">© 2026 Ownthum AI. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <Link href="/privacy" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <Link
+              href="/privacy"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            >
               Privacy
             </Link>
-            <Link href="/terms" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <Link
+              href="/terms"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            >
               Terms
             </Link>
           </div>

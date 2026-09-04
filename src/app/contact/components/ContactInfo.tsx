@@ -34,7 +34,11 @@ export default function ContactInfo() {
           {benefits.map((b) => (
             <div key={b.title} className="flex items-start gap-4">
               <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <Icon name={b.icon as Parameters<typeof Icon>[0]['name']} size={18} className="text-primary" />
+                <Icon
+                  name={b.icon as Parameters<typeof Icon>[0]['name']}
+                  size={18}
+                  className="text-primary"
+                />
               </div>
               <div>
                 <p className="text-sm font-semibold text-foreground mb-1">{b.title}</p>

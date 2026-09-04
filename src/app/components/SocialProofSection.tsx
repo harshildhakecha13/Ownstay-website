@@ -1,4 +1,3 @@
-
 const placeholderLogos = [
   'Grand Pacific Hotels',
   'Meridian Resorts',
@@ -10,7 +9,11 @@ const placeholderLogos = [
 
 export default function SocialProofSection() {
   return (
-    <section className="py-14 border-y border-border bg-secondary/40" id="social-proof" aria-label="Trusted by hotels">
+    <section
+      className="py-14 border-y border-border bg-secondary/40"
+      id="social-proof"
+      aria-label="Trusted by hotels"
+    >
       <div className="max-w-7xl mx-auto px-6">
         <p className="text-center text-xs font-bold tracking-[0.4em] uppercase text-muted-foreground mb-10">
           Built for the way modern hotels operate

@@ -7,8 +7,14 @@ export default function FinalCtaSection() {
       <div className="max-w-5xl mx-auto">
         <div className="relative bg-foreground rounded-3xl overflow-hidden px-8 py-16 md:px-16 md:py-20 text-center shadow-card-hover">
           {/* Background blobs */}
-          <div className="absolute top-0 right-0 w-80 h-80 blob-primary opacity-60 -z-0" aria-hidden="true" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 blob-secondary opacity-40 -z-0" aria-hidden="true" />
+          <div
+            className="absolute top-0 right-0 w-80 h-80 blob-primary opacity-60 -z-0"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute bottom-0 left-0 w-64 h-64 blob-secondary opacity-40 -z-0"
+            aria-hidden="true"
+          />
 
           <div className="relative z-10 space-y-6">
             <p className="text-xs font-bold tracking-[0.4em] uppercase text-primary">

@@ -6,7 +6,8 @@ import ContactInfo from '@/app/contact/components/ContactInfo';
 
 export const metadata: Metadata = {
   title: 'Book a Demo — Ownstay AI Receptionist for Hotels',
-  description: 'Book a personalized demo of Ownstay and see how AI can transform guest communication at your hotel.',
+  description:
+    'Book a personalized demo of Ownstay and see how AI can transform guest communication at your hotel.',
 };
 
 export default function ContactPage() {
@@ -18,14 +19,20 @@ export default function ContactPage() {
           {/* Page Header */}
           <div className="max-w-2xl mb-14">
             <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-2 mb-6">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse-ring" aria-hidden="true" />
-              <span className="text-xs font-bold tracking-widest uppercase text-primary">Book a Demo</span>
+              <span
+                className="w-2 h-2 rounded-full bg-primary animate-pulse-ring"
+                aria-hidden="true"
+              />
+              <span className="text-xs font-bold tracking-widest uppercase text-primary">
+                Book a Demo
+              </span>
             </div>
             <h1 className="text-section-xl font-bold text-foreground tracking-tight mb-5">
               See Ownstay in action.
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Book a personalized demo and discover how Ownstay can transform guest communication at your hotel. Our team will walk you through the platform and answer your questions.
+              Book a personalized demo and discover how Ownstay can transform guest communication at
+              your hotel. Our team will walk you through the platform and answer your questions.
             </p>
           </div>
 

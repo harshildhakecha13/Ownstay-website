@@ -13,13 +13,15 @@ const examples: LanguageExample[] = [
     lang: 'English',
     flag: '🇬🇧',
     guestMsg: 'Is there a swimming pool?',
-    aiMsg: 'Yes! Our outdoor pool is open from 7:00 AM to 10:00 PM on the rooftop. Would you like directions?',
+    aiMsg:
+      'Yes! Our outdoor pool is open from 7:00 AM to 10:00 PM on the rooftop. Would you like directions?',
   },
   {
     lang: 'Vietnamese',
     flag: '🇻🇳',
     guestMsg: 'Khách sạn có dịch vụ đưa đón sân bay không?',
-    aiMsg: 'Xin chào! Có, khách sạn cung cấp dịch vụ đưa đón sân bay. Vui lòng cho biết giờ đến của bạn.',
+    aiMsg:
+      'Xin chào! Có, khách sạn cung cấp dịch vụ đưa đón sân bay. Vui lòng cho biết giờ đến của bạn.',
   },
   {
     lang: 'Chinese',
@@ -41,7 +43,18 @@ const examples: LanguageExample[] = [
   },
 ];
 
-const languages = ['English', 'Vietnamese', 'Chinese', 'Japanese', 'Hindi', 'Korean', 'Thai', 'French', 'Arabic', 'Spanish'];
+const languages = [
+  'English',
+  'Vietnamese',
+  'Chinese',
+  'Japanese',
+  'Hindi',
+  'Korean',
+  'Thai',
+  'French',
+  'Arabic',
+  'Spanish',
+];
 
 export default function MultilingualSection() {
   const [activeExample, setActiveExample] = useState(0);
@@ -54,17 +67,27 @@ export default function MultilingualSection() {
   }, []);
 
   return (
-    <section className="section-pad bg-background" id="multilingual" aria-labelledby="multilingual-heading">
+    <section
+      className="section-pad bg-background"
+      id="multilingual"
+      aria-labelledby="multilingual-heading"
+    >
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left */}
           <div>
-            <p className="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Multilingual</p>
-            <h2 id="multilingual-heading" className="text-section-xl font-bold text-foreground tracking-tight mb-5">
+            <p className="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">
+              Multilingual
+            </p>
+            <h2
+              id="multilingual-heading"
+              className="text-section-xl font-bold text-foreground tracking-tight mb-5"
+            >
               Speak your guests&apos; language.
             </h2>
             <p className="text-base text-muted-foreground leading-relaxed mb-8">
-              Ownstay communicates with guests in their preferred language — automatically. No manual translation, no language barriers.
+              Ownstay communicates with guests in their preferred language — automatically. No
+              manual translation, no language barriers.
             </p>
 
             {/* Language chips */}
@@ -110,7 +133,9 @@ export default function MultilingualSection() {
               </div>
               <div>
                 <p className="text-sm font-semibold text-white">Ownstay</p>
-                <p className="text-xs text-white/60">{examples[activeExample].lang} · AI Receptionist</p>
+                <p className="text-xs text-white/60">
+                  {examples[activeExample].lang} · AI Receptionist
+                </p>
               </div>
             </div>
             <div className="p-6 space-y-4 min-h-[200px]">

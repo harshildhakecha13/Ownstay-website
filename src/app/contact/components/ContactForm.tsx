@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Icon from '@/components/ui/AppIcon';
+import Link from 'next/link';
 
 interface FormData {
   fullName: string;
@@ -9,7 +10,10 @@ interface FormData {
   jobTitle: string;
   country: string;
   rooms: string;
+  pms: string;
   phone: string;
+  preferredDate: string;
+  preferredTimeSlot: string;
   message: string;
 }
 
@@ -18,28 +22,60 @@ const initialData: FormData = {
   workEmail: '',
   hotel: '',
   jobTitle: '',
-  country: '',
-  rooms: '',
+  country: 'United States',
+  rooms: '51–100 rooms',
+  pms: 'Oracle Opera Cloud',
   phone: '',
+  preferredDate: 'Tomorrow',
+  preferredTimeSlot: '10:00 AM EST',
   message: '',
 };
 
 const countries = [
-  'Singapore', 'Vietnam', 'Thailand', 'Indonesia', 'Malaysia',
-  'Philippines', 'Japan', 'South Korea', 'China', 'India',
-  'United Arab Emirates', 'United Kingdom', 'United States',
-  'Australia', 'Germany', 'France', 'Other',
+  'United States',
+  'United Kingdom',
+  'United Arab Emirates',
+  'Singapore',
+  'India',
+  'Indonesia',
+  'Thailand',
+  'Vietnam',
+  'Japan',
+  'Australia',
+  'Germany',
+  'France',
+  'Spain',
+  'Italy',
+  'Other',
 ];
 
 const roomRanges = [
-  'Under 20 rooms', '20–50 rooms', '51–100 rooms',
-  '101–200 rooms', '201–500 rooms', '500+ rooms',
+  'Under 20 rooms (Boutique)',
+  '20–50 rooms (Boutique/Lodge)',
+  '51–100 rooms (Mid-scale)',
+  '101–200 rooms (Full Service)',
+  '201–500 rooms (Resort/Luxury)',
+  '500+ rooms (Mega Resort / Chain)',
 ];
 
-const jobTitles = [
-  'Hotel Owner', 'General Manager', 'Hotel Manager',
-  'Director of Operations', 'Revenue Manager', 'Front Desk Manager',
-  'Technology Manager', 'Investor', 'Consultant', 'Other',
+const pmsOptions = [
+  'Oracle Opera (Cloud / v5)',
+  'Amadeus',
+  'Cloudbeds',
+  'StayNTouch',
+  'Maestro PMS',
+  'Infor HMS',
+  'WebRezPro',
+  'Other / Custom API',
+];
+
+const timeSlots = [
+  '09:00 AM EST',
+  '10:30 AM EST',
+  '01:00 PM EST',
+  '03:30 PM EST',
+  '06:00 PM EST',
+  '08:00 PM EST',
 ];
 
 export default function ContactForm() {
@@ -56,22 +92,56 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // API-ready: replace with actual form submission endpoint
-    await new Promise((resolve) => setTimeout(resolve, 1200));
+    await new Promise((resolve) => setTimeout(resolve, 800));
     setLoading(false);
     setSubmitted(true);
   };
 
   if (submitted) {
     return (
-      <div className="bg-card border border-border rounded-3xl p-12 text-center shadow-card">
-        <div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-6">
-          <Icon name="CheckCircleIcon" size={32} className="text-green-600" variant="solid" />
+      <div className="bg-white border border-border rounded-3xl p-10 md:p-12 text-center shadow-lg animate-in zoom-in-95 duration-200">
+        <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-6">
+          <Icon name="CheckCircleIcon" size={32} />
         </div>
-        <h2 className="text-2xl font-bold text-foreground mb-3">Thank you!</h2>
-        <p className="text-base text-muted-foreground leading-relaxed max-w-sm mx-auto">
-          Our team will review your request and be in touch shortly to schedule your demo.
+        <h2 className="text-2xl font-bold text-foreground mb-2">Demo Session Reserved!</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed max-w-md mx-auto mb-6">
+          A calendar invitation and sandbox login credentials have been dispatched to{' '}
+          <strong className="text-foreground">{formData.workEmail || 'your email'}</strong> for{' '}
+          <strong className="text-foreground">
+            {formData.preferredDate} at {formData.preferredTimeSlot}
+          </strong>
+          .
         </p>
+
+        <div className="p-5 rounded-2xl bg-slate-50 border border-border max-w-md mx-auto text-left text-xs space-y-2 mb-8">
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">Property:</span>
+            <span className="font-bold text-foreground">{formData.hotel || 'Grand Azure'}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">PMS Integration:</span>
+            <span className="font-bold text-primary">{formData.pms}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">Lead Specialist:</span>
+            <span className="font-bold text-foreground">Arjun Mehta (Founding Team)</span>
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Link
+            href="/demo"
+            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary/90 transition-colors shadow-sm"
+          >
+            Explore Interactive Live Demos Now →
+          </Link>
+          <button
+            onClick={() => setSubmitted(false)}
+            className="w-full sm:w-auto px-5 py-3 rounded-xl border border-border text-xs font-semibold text-foreground hover:bg-slate-50"
+          >
+            Schedule Another Property
+          </button>
+        </div>
       </div>
     );
   }
@@ -79,15 +149,13 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-card border border-border rounded-3xl p-8 md:p-10 shadow-card space-y-5"
-      aria-label="Book a demo form"
-      noValidate
+      className="bg-white border border-border rounded-3xl p-8 md:p-10 shadow-lg space-y-6"
     >
       {/* Row 1: Full Name + Work Email */}
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
-          <label htmlFor="fullName" className="block text-sm font-semibold text-foreground mb-1.5">
-            Full Name <span className="text-primary" aria-hidden="true">*</span>
+          <label htmlFor="fullName" className="block text-xs font-bold text-foreground mb-1.5">
+            Full Name <span className="text-primary">*</span>
           </label>
           <input
             id="fullName"
@@ -96,13 +164,13 @@ export default function ContactForm() {
             required
             value={formData.fullName}
             onChange={handleChange}
-            placeholder="James Nguyen"
-            className="w-full bg-secondary border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
+            placeholder="Alexandra Vance"
+            className="w-full bg-slate-50 border border-border rounded-xl px-4 py-3 text-sm text-foreground focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20"
           />
         </div>
         <div>
-          <label htmlFor="workEmail" className="block text-sm font-semibold text-foreground mb-1.5">
-            Work Email <span className="text-primary" aria-hidden="true">*</span>
+          <label htmlFor="workEmail" className="block text-xs font-bold text-foreground mb-1.5">
+            Work Email <span className="text-primary">*</span>
           </label>
           <input
             id="workEmail"
@@ -111,17 +179,17 @@ export default function ContactForm() {
             required
             value={formData.workEmail}
             onChange={handleChange}
-            placeholder="james@grandhotel.com"
-            className="w-full bg-secondary border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
+            placeholder="alexandra@azurehotel.com"
+            className="w-full bg-slate-50 border border-border rounded-xl px-4 py-3 text-sm text-foreground focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20"
           />
         </div>
       </div>
 
-      {/* Row 2: Hotel + Job Title */}
+      {/* Row 2: Hotel + Property Keys */}
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
-          <label htmlFor="hotel" className="block text-sm font-semibold text-foreground mb-1.5">
-            Hotel / Company <span className="text-primary" aria-hidden="true">*</span>
+          <label htmlFor="hotel" className="block text-xs font-bold text-foreground mb-1.5">
+            Hotel / Property Name <span className="text-primary">*</span>
           </label>
           <input
             id="hotel"
@@ -130,52 +198,12 @@ export default function ContactForm() {
             required
             value={formData.hotel}
             onChange={handleChange}
-            placeholder="Grand Pacific Hotel"
-            className="w-full bg-secondary border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
+            placeholder="Grand Azure Resort & Spa"
+            className="w-full bg-slate-50 border border-border rounded-xl px-4 py-3 text-sm text-foreground focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20"
           />
         </div>
         <div>
-          <label htmlFor="jobTitle" className="block text-sm font-semibold text-foreground mb-1.5">
-            Job Title <span className="text-primary" aria-hidden="true">*</span>
-          </label>
-          <select
-            id="jobTitle"
-            name="jobTitle"
-            required
-            value={formData.jobTitle}
-            onChange={handleChange}
-            className="w-full bg-secondary border border-border rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
-          >
-            <option value="">Select your role</option>
-            {jobTitles.map((t) => (
-              <option key={t} value={t}>{t}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      {/* Row 3: Country + Rooms */}
-      <div className="grid sm:grid-cols-2 gap-5">
-        <div>
-          <label htmlFor="country" className="blocktext-sm font-semibold text-foreground mb-1.5">
-            Country <span className="text-primary" aria-hidden="true">*</span>
-          </label>
-          <select
-            id="country"
-            name="country"
-            required
-            value={formData.country}
-            onChange={handleChange}
-            className="w-full bg-secondary border border-border rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
-          >
-            <option value="">Select country</option>
-            {countries.map((c) => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label htmlFor="rooms" className="block text-sm font-semibold text-foreground mb-1.5">
+          <label htmlFor="rooms" className="block text-xs font-bold text-foreground mb-1.5">
             Number of Rooms
           </label>
           <select
@@ -183,69 +211,117 @@ export default function ContactForm() {
             name="rooms"
             value={formData.rooms}
             onChange={handleChange}
-            className="w-full bg-secondary border border-border rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
+            className="w-full bg-slate-50 border border-border rounded-xl px-4 py-3 text-sm text-foreground focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20"
           >
-            <option value="">Select range</option>
             {roomRanges.map((r) => (
-              <option key={r} value={r}>{r}</option>
+              <option key={r} value={r}>
+                {r}
+              </option>
             ))}
           </select>
         </div>
       </div>
 
-      {/* Row 4: Phone */}
-      <div>
-        <label htmlFor="phone" className="block text-sm font-semibold text-foreground mb-1.5">
-          Phone Number
-        </label>
-        <input
-          id="phone"
-          name="phone"
-          type="tel"
-          value={formData.phone}
-          onChange={handleChange}
-          placeholder="+65 9123 4567"
-          className="w-full bg-secondary border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
-        />
+      {/* Row 3: Current PMS + Country */}
+      <div className="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label htmlFor="pms" className="block text-xs font-bold text-foreground mb-1.5">
+            Current Hotel PMS
+          </label>
+          <select
+            id="pms"
+            name="pms"
+            value={formData.pms}
+            onChange={handleChange}
+            className="w-full bg-slate-50 border border-border rounded-xl px-4 py-3 text-sm text-foreground focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20"
+          >
+            {pmsOptions.map((p) => (
+              <option key={p} value={p}>
+                {p}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="country" className="block text-xs font-bold text-foreground mb-1.5">
+            Country / Region
+          </label>
+          <select
+            id="country"
+            name="country"
+            value={formData.country}
+            onChange={handleChange}
+            className="w-full bg-slate-50 border border-border rounded-xl px-4 py-3 text-sm text-foreground focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20"
+          >
+            {countries.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
-      {/* Row 5: Message */}
+      {/* Row 4: Preferred Live Demo Time Slot */}
+      <div className="p-5 rounded-2xl bg-orange-50/60 border border-orange-200/60 space-y-3">
+        <label className="block text-xs font-bold text-orange-950">
+          Select Preferred Demo Time Slot
+        </label>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          {timeSlots.map((slot) => (
+            <button
+              type="button"
+              key={slot}
+              onClick={() => setFormData((prev) => ({ ...prev, preferredTimeSlot: slot }))}
+              className={`py-2 px-3 rounded-xl text-xs font-bold transition-all ${
+                formData.preferredTimeSlot === slot
+                  ? 'bg-primary text-white shadow-sm'
+                  : 'bg-white border border-orange-200 text-orange-900 hover:bg-orange-100'
+              }`}
+            >
+              {slot}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Row 5: Notes */}
       <div>
-        <label htmlFor="message" className="block text-sm font-semibold text-foreground mb-1.5">
-          Message
+        <label htmlFor="message" className="block text-xs font-bold text-foreground mb-1.5">
+          Specific questions or workflows you want to test (Optional)
         </label>
         <textarea
           id="message"
           name="message"
-          rows={4}
+          rows={3}
           value={formData.message}
           onChange={handleChange}
-          placeholder="Tell us about your hotel and what you're looking to achieve with Ownstay..."
-          className="w-full bg-secondary border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors resize-none"
+          placeholder="e.g. We want to automate WhatsApp check-in and reduce phone calls during our 3 PM rush..."
+          className="w-full bg-slate-50 border border-border rounded-xl px-4 py-3 text-sm text-foreground focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 resize-none"
         />
       </div>
 
-      {/* Submit */}
+      {/* Submit Button */}
       <button
         type="submit"
         disabled={loading}
-        className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground font-semibold text-base px-8 py-4 rounded-xl hover:opacity-90 transition-all shadow-orange disabled:opacity-60 disabled:cursor-not-allowed"
+        className="w-full flex items-center justify-center gap-2 bg-primary text-white font-bold text-sm px-8 py-4 rounded-xl hover:bg-primary/90 transition-all shadow-md shadow-primary/20 disabled:opacity-60"
       >
         {loading ? (
           <>
-            <Icon name="ArrowPathIcon" size={18} className="animate-spin" />
-            Sending...
+            <span className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin" />
+            Locking in calendar slot...
           </>
         ) : (
           <>
-            Request a Demo
-            <Icon name="ArrowRightIcon" size={18} />
+            Confirm 20-Min Live Walkthrough
+            <Icon name="ArrowRightIcon" size={16} />
           </>
         )}
       </button>
 
-      <p className="text-xs text-muted-foreground text-center leading-relaxed">
-        By submitting this form you agree to our privacy policy. We will never share your information.
+      <p className="text-[11px] text-muted-foreground text-center">
+        No credit card required. Includes a 14-day zero-risk live pilot for qualified hotels.
       </p>
     </form>
   );

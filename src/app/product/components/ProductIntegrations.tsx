@@ -3,9 +3,10 @@ import Icon from '@/components/ui/AppIcon';
 const integrationCategories = [
   {
     icon: 'BuildingOfficeIcon',
-    title: 'Mews PMS',
-    description: 'Native 2-way integration with Mews. Sync reservations, verify guest identity, and post charges to folios in real-time.',
-    tag: 'Official Partner',
+    title: 'Enterprise PMS Gateway',
+    description:
+      'Native 2-way integration with Opera, Amadeus, Cloudbeds, and major systems. Sync reservations, verify identity, and post charges in real-time.',
+    tag: 'Universal Sync',
     color: 'text-blue-600',
     bg: 'bg-blue-50',
   },
@@ -53,15 +54,26 @@ const integrationCategories = [
 
 export default function ProductIntegrations() {
   return (
-    <section className="section-pad bg-secondary" id="integrations" aria-labelledby="integrations-heading">
+    <section
+      className="section-pad bg-secondary"
+      id="integrations"
+      aria-labelledby="integrations-heading"
+    >
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-xl mx-auto mb-16">
-          <p className="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Integrations</p>
-          <h2 id="integrations-heading" className="text-section-xl font-bold text-foreground tracking-tight mb-5">
+          <p className="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">
+            Integrations
+          </p>
+          <h2
+            id="integrations-heading"
+            className="text-section-xl font-bold text-foreground tracking-tight mb-5"
+          >
             Works with your hotel ecosystem.
           </h2>
           <p className="text-base text-muted-foreground leading-relaxed">
-            Ownstay is designed to fit precisely into the Mews ecosystem. Built specifically for Mews-connected hotels, our AI agents securely leverage your live Mews data to perform magic.
+            Ownstay is designed to fit precisely into your hotel ecosystem. Built to integrate
+            seamlessly with leading PMS platforms, our AI agents securely leverage your live PMS
+            data to perform real-time resolution.
           </p>
         </div>
 
@@ -75,14 +87,19 @@ export default function ProductIntegrations() {
           <div className="w-0.5 h-8 bg-border" aria-hidden="true" />
           {/* Ownstay */}
           <div className="bg-primary rounded-2xl px-10 py-5 shadow-orange flex items-center gap-3">
-            <Icon name="SparklesIcon" size={22} className="text-primary-foreground" variant="solid" />
+            <Icon
+              name="SparklesIcon"
+              size={22}
+              className="text-primary-foreground"
+              variant="solid"
+            />
             <span className="text-base font-bold text-primary-foreground">Ownstay AI</span>
           </div>
           <div className="w-0.5 h-8 bg-border" aria-hidden="true" />
           {/* Hotel Systems */}
           <div className="bg-card border border-border rounded-2xl px-8 py-4 shadow-card flex items-center gap-3 border-blue-200 bg-blue-50/30">
             <Icon name="BuildingOfficeIcon" size={20} className="text-blue-600" />
-            <span className="text-sm font-bold text-foreground">Mews PMS</span>
+            <span className="text-sm font-bold text-foreground">Enterprise PMS Gateway</span>
           </div>
           <div className="w-0.5 h-8 bg-border" aria-hidden="true" />
           {/* Hotel Team */}
@@ -101,9 +118,15 @@ export default function ProductIntegrations() {
             >
               <div className="flex items-start justify-between mb-4">
                 <div className={`w-10 h-10 rounded-xl ${int.bg} flex items-center justify-center`}>
-                  <Icon name={int.icon as Parameters<typeof Icon>[0]['name']} size={20} className={int.color} />
+                  <Icon
+                    name={int.icon as Parameters<typeof Icon>[0]['name']}
+                    size={20}
+                    className={int.color}
+                  />
                 </div>
-                <span className={`text-[11px] font-bold tracking-wider uppercase ${int.color} px-2.5 py-1 rounded-full ${int.bg}`}>
+                <span
+                  className={`text-[11px] font-bold tracking-wider uppercase ${int.color} px-2.5 py-1 rounded-full ${int.bg}`}
+                >
                   {int.tag}
                 </span>
               </div>
@@ -114,7 +137,8 @@ export default function ProductIntegrations() {
         </div>
 
         <p className="text-center text-xs text-muted-foreground mt-8 italic">
-          Contact our team to confirm specific integration availability for your hotel technology stack.
+          Contact our team to confirm specific integration availability for your hotel technology
+          stack.
         </p>
       </div>
     </section>

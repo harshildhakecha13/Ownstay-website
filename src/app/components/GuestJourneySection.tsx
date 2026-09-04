@@ -60,11 +60,21 @@ export default function GuestJourneySection() {
   }, []);
 
   return (
-    <section className="section-pad bg-secondary" id="guest-journey" aria-labelledby="journey-heading" ref={ref}>
+    <section
+      className="section-pad bg-secondary"
+      id="guest-journey"
+      aria-labelledby="journey-heading"
+      ref={ref}
+    >
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-xl mx-auto mb-16">
-          <p className="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">Guest Journey</p>
-          <h2 id="journey-heading" className="text-section-xl font-bold text-foreground tracking-tight mb-5">
+          <p className="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">
+            Guest Journey
+          </p>
+          <h2
+            id="journey-heading"
+            className="text-section-xl font-bold text-foreground tracking-tight mb-5"
+          >
             One AI across the entire guest journey.
           </h2>
           <p className="text-base text-muted-foreground leading-relaxed">
@@ -89,16 +99,20 @@ export default function GuestJourneySection() {
                 className="relative flex flex-col items-center gap-3 group z-10"
                 aria-label={`View ${stage.stage} stage`}
               >
-                <div className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
-                  i <= activeStage
-                    ? 'bg-primary border-primary text-primary-foreground shadow-orange'
-                    : 'bg-card border-border text-muted-foreground group-hover:border-primary/50'
-                }`}>
+                <div
+                  className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+                    i <= activeStage
+                      ? 'bg-primary border-primary text-primary-foreground shadow-orange'
+                      : 'bg-card border-border text-muted-foreground group-hover:border-primary/50'
+                  }`}
+                >
                   <Icon name={stage.icon as Parameters<typeof Icon>[0]['name']} size={20} />
                 </div>
-                <span className={`text-sm font-bold tracking-wide transition-colors ${
-                  i === activeStage ? 'text-primary' : 'text-muted-foreground'
-                }`}>
+                <span
+                  className={`text-sm font-bold tracking-wide transition-colors ${
+                    i === activeStage ? 'text-primary' : 'text-muted-foreground'
+                  }`}
+                >
                   {stage.stage}
                 </span>
               </button>
@@ -133,10 +147,16 @@ export default function GuestJourneySection() {
                 </div>
                 <div className="flex items-start gap-3 mt-4 justify-end">
                   <div className="bg-primary/10 text-foreground border border-primary/20 px-4 py-3 rounded-2xl rounded-tr-sm text-sm leading-relaxed max-w-xs">
-                    <span className="text-primary font-semibold">Ownstay</span> responds instantly with the right answer.
+                    <span className="text-primary font-semibold">Ownstay</span> responds instantly
+                    with the right answer.
                   </div>
                   <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Icon name="SparklesIcon" size={16} className="text-primary-foreground" variant="solid" />
+                    <Icon
+                      name="SparklesIcon"
+                      size={16}
+                      className="text-primary-foreground"
+                      variant="solid"
+                    />
                   </div>
                 </div>
               </div>
@@ -157,9 +177,13 @@ export default function GuestJourneySection() {
               onClick={() => setActiveStage(i)}
             >
               <div className="flex items-center gap-4 mb-3">
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                  i === activeStage ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground'
-                }`}>
+                <div
+                  className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                    i === activeStage
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-secondary text-muted-foreground'
+                  }`}
+                >
                   <Icon name={stage.icon as Parameters<typeof Icon>[0]['name']} size={18} />
                 </div>
                 <div>
@@ -168,9 +192,7 @@ export default function GuestJourneySection() {
                 </div>
               </div>
               {i === activeStage && (
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {stage.description}
-                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{stage.description}</p>
               )}
             </div>
           ))}
