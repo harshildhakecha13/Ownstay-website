@@ -116,31 +116,6 @@ function MenuSpotlightCard({
   );
 }
 
-// Quick Notification Feed Item
-const notificationsData = [
-  {
-    id: 1,
-    title: 'Room 408: Late Checkout Approved',
-    desc: 'Autonomous AI extended stay to 1:00 PM via Opera Cloud PMS sync.',
-    time: '2m ago',
-    type: 'ai',
-  },
-  {
-    id: 2,
-    title: 'VIP Arrival: Mr. Vance (Pres. Suite)',
-    desc: 'Pre-checkin complete with mobile digital key issued.',
-    time: '14m ago',
-    type: 'guest',
-  },
-  {
-    id: 3,
-    title: 'Kitchen KDS: Rush Order Completed',
-    desc: 'Table 14 order fulfilled in 9.4 mins (below 12 min target).',
-    time: '28m ago',
-    type: 'kds',
-  },
-];
-
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -149,8 +124,6 @@ export default function Header() {
   // Popover States
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [notificationsOpen, setNotificationsOpen] = useState(false);
-  const [sandboxSwitcherOpen, setSandboxSwitcherOpen] = useState(false);
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const pathname = usePathname();
@@ -169,8 +142,6 @@ export default function Header() {
         setSearchOpen((prev) => !prev);
       } else if (e.key === 'Escape') {
         setSearchOpen(false);
-        setNotificationsOpen(false);
-        setSandboxSwitcherOpen(false);
         setActiveMenu(null);
       }
     };
@@ -233,13 +204,13 @@ export default function Header() {
     {
       name: 'Kitchen & KDS Screen',
       category: 'Teams',
-      href: '/product/in-stay-support',
+      href: '/product/kitchen-kds',
       badge: 'Station',
     },
     {
       name: 'Analytics & Yield Reports',
       category: 'Intelligence',
-      href: '/product/conversation-management',
+      href: '/product/yield-analytics',
       badge: 'AI RevPAR',
     },
     {
@@ -338,177 +309,6 @@ export default function Header() {
 
           {/* Right: Actions */}
           <div className="flex items-center gap-3 sm:gap-4 shrink-0">
-            {/* Notification Center */}
-            <div className="relative">
-              <button
-                onClick={() => {
-                  setNotificationsOpen(!notificationsOpen);
-                  setSandboxSwitcherOpen(false);
-                }}
-                className={`relative p-2 rounded-full hover:bg-slate-100 transition-colors ${
-                  notificationsOpen
-                    ? 'bg-slate-100 text-primary'
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-                aria-label="Real-time notifications"
-              >
-                <Icon name="BellIcon" size={19} />
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary ring-2 ring-white animate-pulse" />
-              </button>
-
-              {/* Notification Popover */}
-              {notificationsOpen && (
-                <div className="absolute right-0 mt-3 w-80 sm:w-96 bg-white border border-border rounded-2xl shadow-2xl p-4 z-50 animate-in fade-in-50 zoom-in-95 duration-150">
-                  <div className="flex items-center justify-between pb-3 border-b border-border/80">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                      <span className="text-xs font-bold text-foreground">
-                        Live AI Hotel Activity
-                      </span>
-                    </div>
-                    <span className="text-[10px] text-muted-foreground font-mono">
-                      Real-time Opera Stream
-                    </span>
-                  </div>
-
-                  <div className="divide-y divide-border/50 max-h-64 overflow-y-auto my-2">
-                    {notificationsData.map((n) => (
-                      <div
-                        key={n.id}
-                        className="py-2.5 hover:bg-slate-50 rounded-lg px-2 transition-colors"
-                      >
-                        <div className="flex items-start justify-between gap-2">
-                          <span className="text-xs font-bold text-foreground leading-tight">
-                            {n.title}
-                          </span>
-                          <span className="text-[10px] text-muted-foreground whitespace-nowrap">
-                            {n.time}
-                          </span>
-                        </div>
-                        <p className="text-[11px] text-muted-foreground mt-0.5 leading-snug">
-                          {n.desc}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="pt-2 border-t border-border/80 flex items-center justify-between">
-                    <Link
-                      href="/demo"
-                      onClick={() => setNotificationsOpen(false)}
-                      className="text-xs font-bold text-primary hover:underline"
-                    >
-                      Open Live Ops Console →
-                    </Link>
-                    <button
-                      onClick={() => setNotificationsOpen(false)}
-                      className="text-[11px] text-muted-foreground hover:text-foreground"
-                    >
-                      Dismiss
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Sandbox & Role Switcher */}
-            <div className="relative">
-              <button
-                onClick={() => {
-                  setSandboxSwitcherOpen(!sandboxSwitcherOpen);
-                  setNotificationsOpen(false);
-                }}
-                className={`flex items-center gap-1.5 p-1.5 sm:px-3 sm:py-1.5 rounded-full bg-secondary/80 hover:bg-secondary border border-border text-xs font-semibold text-foreground transition-colors ${
-                  sandboxSwitcherOpen ? 'border-primary ring-2 ring-primary/20' : ''
-                }`}
-                aria-label="Role & Sandbox switcher"
-              >
-                <div className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">
-                  <Icon name="UserIcon" size={14} />
-                </div>
-                <span className="hidden md:inline">Sandboxes</span>
-                <Icon
-                  name="ChevronDownIcon"
-                  size={12}
-                  className="hidden sm:inline text-muted-foreground"
-                />
-              </button>
-
-              {/* Sandbox Switcher Popover */}
-              {sandboxSwitcherOpen && (
-                <div className="absolute right-0 mt-3 w-72 bg-white border border-border rounded-2xl shadow-2xl p-4 z-50 animate-in fade-in-50 zoom-in-95 duration-150">
-                  <div className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-2">
-                    Switch Active Sandbox
-                  </div>
-                  <div className="space-y-1.5">
-                    <Link
-                      href="/demo?tab=admin"
-                      onClick={() => setSandboxSwitcherOpen(false)}
-                      className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 border border-transparent hover:border-border transition-colors group"
-                    >
-                      <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs shrink-0">
-                        <Icon name="BuildingOffice2Icon" size={18} />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="text-xs font-bold text-foreground group-hover:text-primary">
-                          Admin Operations PMS
-                        </div>
-                        <div className="text-[10px] text-muted-foreground">
-                          Guest folios, room grid, analytics
-                        </div>
-                      </div>
-                    </Link>
-
-                    <Link
-                      href="/demo?tab=guest"
-                      onClick={() => setSandboxSwitcherOpen(false)}
-                      className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 border border-transparent hover:border-border transition-colors group"
-                    >
-                      <div className="w-8 h-8 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center font-bold text-xs shrink-0">
-                        <Icon name="ChatBubbleBottomCenterTextIcon" size={18} />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="text-xs font-bold text-foreground group-hover:text-primary">
-                          Guest Mobile Concierge
-                        </div>
-                        <div className="text-[10px] text-muted-foreground">
-                          Digital key, AI chat & room dining
-                        </div>
-                      </div>
-                    </Link>
-
-                    <Link
-                      href="/demo?tab=kds"
-                      onClick={() => setSandboxSwitcherOpen(false)}
-                      className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 border border-transparent hover:border-border transition-colors group"
-                    >
-                      <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs shrink-0">
-                        <Icon name="FireIcon" size={18} />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="text-xs font-bold text-foreground group-hover:text-primary">
-                          Kitchen KDS Display
-                        </div>
-                        <div className="text-[10px] text-muted-foreground">
-                          Live ticket dispatch & prep timing
-                        </div>
-                      </div>
-                    </Link>
-                  </div>
-
-                  <div className="mt-3 pt-2.5 border-t border-border/80">
-                    <Link
-                      href="/contact"
-                      onClick={() => setSandboxSwitcherOpen(false)}
-                      className="block text-center py-2 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary/90 transition-colors shadow-sm"
-                    >
-                      Book 20-Min Custom Demo
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
-
             {/* Direct Book Demo CTA */}
             <Link
               href="/contact"
@@ -577,33 +377,16 @@ export default function Header() {
                   ))}
                 </div>
 
-                {/* Right: Operations & Teams Categories */}
-                <div className="w-[64%] p-7 grid grid-cols-2 gap-x-10 gap-y-8 bg-white">
-                  {/* Column 1: Operations & Intelligence */}
+                {/* Right: Operations, Teams & Intelligence Categories */}
+                <div className="w-[64%] p-7 grid grid-cols-3 gap-x-8 bg-white">
+                  {/* Column 1: Hotel Operations */}
                   <div className="flex flex-col gap-7">
-                    {/* HOTEL OPERATIONS */}
                     <div>
                       <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-3 pb-1.5 border-b border-border/60">
                         {navigationConfig.product.categories.hotops.title}
                       </h3>
                       <div className="flex flex-col gap-1.5">
                         {navigationConfig.product.categories.hotops.items.map((link) => (
-                          <NavigationRow
-                            key={link.label}
-                            item={link}
-                            onClick={() => setActiveMenu(null)}
-                          />
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* INTELLIGENCE & CONTROL */}
-                    <div>
-                      <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-3 pb-1.5 border-b border-border/60">
-                        {navigationConfig.product.categories.intelligence.title}
-                      </h3>
-                      <div className="flex flex-col gap-1.5">
-                        {navigationConfig.product.categories.intelligence.items.map((link) => (
                           <NavigationRow
                             key={link.label}
                             item={link}
@@ -631,28 +414,25 @@ export default function Header() {
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
 
-              {/* Bottom Quick Bar */}
-              <div className="px-6 py-3 bg-slate-50 border-t border-border flex items-center justify-between text-xs">
-                <div className="flex items-center gap-6 text-muted-foreground">
-                  <span className="font-semibold text-foreground flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    Live Integrations:
-                  </span>
-                  <span>Oracle Opera Cloud</span>
-                  <span>Amadeus</span>
-                  <span>Cloudbeds</span>
-                  <span>StayNTouch</span>
+                  {/* Column 3: Intelligence & Guest AI */}
+                  <div className="flex flex-col gap-7">
+                    <div>
+                      <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-3 pb-1.5 border-b border-border/60">
+                        {navigationConfig.product.categories.intelligence.title}
+                      </h3>
+                      <div className="flex flex-col gap-1.5">
+                        {navigationConfig.product.categories.intelligence.items.map((link) => (
+                          <NavigationRow
+                            key={link.label}
+                            item={link}
+                            onClick={() => setActiveMenu(null)}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <Link
-                  href="/demo"
-                  onClick={() => setActiveMenu(null)}
-                  className="font-bold text-primary hover:underline flex items-center gap-1"
-                >
-                  Launch Interactive Sandbox Suite →
-                </Link>
               </div>
             </div>
           )}
@@ -850,27 +630,34 @@ export default function Header() {
           {/* Quick Sandbox Links in Mobile */}
           <div className="p-4 rounded-2xl bg-orange-50/60 border border-orange-200/60">
             <div className="text-xs font-bold text-orange-950 mb-2">Live Demo Sandboxes</div>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 xs:grid-cols-4 gap-2">
               <Link
-                href="/demo?tab=admin"
+                href="/demo/admin"
                 onClick={() => setMobileOpen(false)}
                 className="p-2 bg-white rounded-xl border border-orange-200 text-center text-[11px] font-bold text-foreground hover:bg-orange-100"
               >
                 PMS Admin
               </Link>
               <Link
-                href="/demo?tab=guest"
+                href="/demo/guest"
                 onClick={() => setMobileOpen(false)}
                 className="p-2 bg-white rounded-xl border border-orange-200 text-center text-[11px] font-bold text-foreground hover:bg-orange-100"
               >
                 Guest Mobile
               </Link>
               <Link
-                href="/demo?tab=kds"
+                href="/demo/kitchen"
                 onClick={() => setMobileOpen(false)}
                 className="p-2 bg-white rounded-xl border border-orange-200 text-center text-[11px] font-bold text-foreground hover:bg-orange-100"
               >
                 Kitchen KDS
+              </Link>
+              <Link
+                href="/demo/crm"
+                onClick={() => setMobileOpen(false)}
+                className="p-2 bg-white rounded-xl border border-orange-200 text-center text-[11px] font-bold text-foreground hover:bg-orange-100 col-span-2 xs:col-span-1"
+              >
+                Guest CRM
               </Link>
             </div>
           </div>
@@ -919,6 +706,24 @@ export default function Header() {
                 </div>
                 <div className="space-y-1">
                   {navigationConfig.product.categories.teams.items.map((f) => (
+                    <Link
+                      key={f.label}
+                      href={f.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="block py-1 text-xs font-semibold text-foreground hover:text-primary"
+                    >
+                      {f.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2">
+                  {navigationConfig.product.categories.intelligence.title}
+                </div>
+                <div className="space-y-1">
+                  {navigationConfig.product.categories.intelligence.items.map((f) => (
                     <Link
                       key={f.label}
                       href={f.href}

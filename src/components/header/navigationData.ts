@@ -84,10 +84,10 @@ export const navigationConfig = {
           },
           {
             label: 'Guest Services & Chat',
-            href: '/product/guest-messaging',
+            href: '/product/conversation-management',
             description: 'Omnichannel guest messaging across WhatsApp, SMS & web.',
             icon: 'ChatBubbleBottomCenterTextIcon',
-            badge: 'Omnichannel',
+            badge: 'Unified',
           },
           {
             label: 'Kitchen & KDS Station',
@@ -105,7 +105,7 @@ export const navigationConfig = {
         ],
       },
       intelligence: {
-        title: 'INTELLIGENCE & CONTROL',
+        title: 'INTELLIGENCE & GUEST AI',
         items: [
           {
             label: 'Analytics & Yield Reports',
@@ -118,13 +118,25 @@ export const navigationConfig = {
             label: 'AI Knowledge Base',
             href: '/product/hotel-knowledge-ai',
             description: 'Trained on your hotel menus, policies, amenities & local guide.',
-            icon: 'CpuChipIcon',
+            icon: 'BookOpenIcon',
           },
           {
             label: 'Security & Audit Logs',
             href: '/product/security-compliance',
             description: 'SOC2 Type II compliant, tokenized payments & PMS audit trail.',
             icon: 'ShieldCheckIcon',
+          },
+          {
+            label: 'AI Voice Receptionist',
+            href: '/product/ai-voice-receptionist',
+            description: 'Natural high-fidelity voice operator handling incoming calls.',
+            icon: 'PhoneIcon',
+          },
+          {
+            label: 'Multilingual Guest AI',
+            href: '/product/multilingual-ai',
+            description: 'Two-way fluent translation across 40+ native languages.',
+            icon: 'LanguageIcon',
           },
         ],
       },

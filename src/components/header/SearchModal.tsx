@@ -77,13 +77,6 @@ const SEARCH_ITEMS: SearchResult[] = [
     href: '/product/conversation-management',
     icon: 'InboxStackIcon',
   },
-  {
-    title: 'AI Operations & Shift Handover',
-    category: 'Operations',
-    description: 'Automate shift summaries, night audits, and team task assignments.',
-    href: '/product/ai-operations',
-    icon: 'CogIcon',
-  },
 
   // Interactive Live Demos
   {
@@ -108,9 +101,16 @@ const SEARCH_ITEMS: SearchResult[] = [
     icon: 'DevicePhoneMobileIcon',
   },
   {
+    title: 'Live Demo: Guest CRM & Profiles Sandbox',
+    category: 'Interactive Demo',
+    description: 'VIP guest profiles database, preferences, stay history, and chat simulator.',
+    href: '/demo/crm',
+    icon: 'UsersIcon',
+  },
+  {
     title: 'Interactive Demos Hub',
     category: 'Interactive Demo',
-    description: 'Explore all 3 live interactive product sandbox environments.',
+    description: 'Explore all 4 live interactive product sandbox environments.',
     href: '/demo',
     icon: 'SparklesIcon',
   },

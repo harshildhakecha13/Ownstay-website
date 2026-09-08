@@ -18,7 +18,7 @@ type ModuleData = {
   category: string;
   heroSubtitle: string;
   icon: string;
-  simType: 'voice' | 'chat' | 'dispatch' | 'pms' | 'yield';
+  simType: 'voice' | 'chat' | 'dispatch' | 'pms' | 'yield' | 'booking' | 'inventory';
   stat: { value: string; label: string };
   benefits: Benefit[];
   howItWorks: string[];
@@ -26,6 +26,7 @@ type ModuleData = {
   faqs: { q: string; a: string }[];
   testimonial: { quote: string; author: string; role: string; hotel: string };
   pmsList: string[];
+  sandboxHref?: string;
 };
 
 const moduleData: Record<string, ModuleData> = {
@@ -151,7 +152,7 @@ const moduleData: Record<string, ModuleData> = {
     heroSubtitle:
       'Turn website visitors and phone callers into confirmed direct bookings with conversational room quoting and frictionless checkout links.',
     icon: 'CalendarDaysIcon',
-    simType: 'yield',
+    simType: 'booking',
     stat: { value: '+18.4%', label: 'Direct Booking Revenue Growth' },
     benefits: [
       {
@@ -204,6 +205,7 @@ const moduleData: Record<string, ModuleData> = {
       'Meet your guests on their favorite messaging channels with 98% open rates and zero app downloads required.',
     icon: 'DevicePhoneMobileIcon',
     simType: 'chat',
+    sandboxHref: '/demo/crm',
     stat: { value: '98%', label: 'Message Read Rate via WhatsApp & SMS' },
     benefits: [
       {
@@ -256,6 +258,7 @@ const moduleData: Record<string, ModuleData> = {
       'A personal digital concierge in the pocket of every in-house guest, available 24/7 without delays.',
     icon: 'KeyIcon',
     simType: 'chat',
+    sandboxHref: '/demo/guest',
     stat: { value: '4.9 / 5', label: 'Average In-Stay Guest Satisfaction' },
     benefits: [
       {
@@ -411,7 +414,7 @@ const moduleData: Record<string, ModuleData> = {
     heroSubtitle:
       'Keep hotel teams perfectly in sync. Eliminate shift handover gaps with AI-generated operational recaps.',
     icon: 'UserGroupIcon',
-    simType: 'pms',
+    simType: 'scheduling',
     stat: { value: '15 min', label: 'Night Audit Shift Handover (Down from 2 hrs)' },
     benefits: [
       {
@@ -462,7 +465,8 @@ const moduleData: Record<string, ModuleData> = {
     heroSubtitle:
       'Digitize kitchen ticket pacing and room service orders. Connect guest WhatsApp chats directly to kitchen prep screens.',
     icon: 'FireIcon',
-    simType: 'dispatch',
+    simType: 'kitchen',
+    sandboxHref: '/demo/kitchen',
     stat: { value: '18 min', label: 'Average Room Service Delivery Time' },
     benefits: [
       {
@@ -512,7 +516,7 @@ const moduleData: Record<string, ModuleData> = {
     heroSubtitle:
       'Never run out of luxury shampoo or breakfast bacon. Track hotel consumption with predictive replenishment.',
     icon: 'CubeIcon',
-    simType: 'yield',
+    simType: 'inventory',
     stat: { value: '-22%', label: 'Reduction in Amenity Waste & Spoilage' },
     benefits: [
       {
@@ -665,7 +669,7 @@ const moduleData: Record<string, ModuleData> = {
     heroSubtitle:
       'Enterprise security architecture ensuring complete data privacy, GDPR compliance, and PCI-DSS certification.',
     icon: 'ShieldCheckIcon',
-    simType: 'pms',
+    simType: 'security',
     stat: { value: 'SOC2', label: 'Type II Certified & Bank-Grade Security' },
     benefits: [
       {
@@ -1077,29 +1081,12 @@ export default async function ModulePage({ params }: { params: Promise<{ module:
                   <Icon name="ArrowRightIcon" size={18} />
                 </Link>
                 <Link
-                  href="/demo"
+                  href={data.sandboxHref || '/demo'}
                   className="inline-flex items-center gap-2 bg-secondary text-foreground font-semibold px-6 py-3.5 rounded-xl hover:bg-slate-200 transition-all border border-border text-base"
                 >
                   <Icon name="PlayIcon" size={18} />
                   Live Interactive Sandbox
                 </Link>
-              </div>
-
-              {/* Supported PMS integrations */}
-              <div className="mt-8 pt-6 border-t border-border/60">
-                <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-                  Certified 2-Way PMS Compatibility
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {data.pmsList.map((pms, i) => (
-                    <span
-                      key={i}
-                      className="text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200 px-3 py-1 rounded-lg"
-                    >
-                      {pms}
-                    </span>
-                  ))}
-                </div>
               </div>
             </div>
 

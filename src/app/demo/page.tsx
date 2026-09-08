@@ -209,6 +209,58 @@ const demos = [
       </svg>
     ),
   },
+  {
+    id: 'crm',
+    href: '/demo/crm',
+    label: 'Guest Management (CRM)',
+    sublabel: 'VIP Profiles & Stays',
+    description:
+      'Unified hotel guest CRM containing individual preference logs, historical bookings, and automated milestone messaging.',
+    features: [
+      'VIP Guest Directory',
+      'Automated Preferences',
+      'Stay History Logs',
+      'WhatsApp Simulator',
+    ],
+    accent: '#8B5CF6',
+    icon: (
+      <svg viewBox="0 0 48 48" fill="none" className="w-10 h-10">
+        <rect
+          x="4"
+          y="4"
+          width="40"
+          height="40"
+          rx="6"
+          fill="#8B5CF6"
+          opacity="0.1"
+          stroke="#8B5CF6"
+          strokeWidth="1.5"
+        />
+        <circle
+          cx="16"
+          cy="18"
+          r="4"
+          stroke="#8B5CF6"
+          strokeWidth="1.5"
+          fill="#8B5CF6"
+          opacity="0.2"
+        />
+        <path
+          d="M8 32c0-4 4-6 8-6s8 2 8 6"
+          stroke="#8B5CF6"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
+        <circle cx="32" cy="18" r="4" stroke="#8B5CF6" strokeWidth="1.5" />
+        <path
+          d="M26 32c0-3 3-5 6-5s6 2 6 5"
+          stroke="#8B5CF6"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
+  },
 ];
 
 export default function DemoPage() {
@@ -216,7 +268,7 @@ export default function DemoPage() {
     <main className="min-h-screen overflow-x-hidden" style={{ background: '#FAF8F5' }}>
       <Header />
       <section className="pt-36 pb-24 px-6">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           {/* Hero */}
           <div className="text-center mb-20">
             <div
@@ -234,13 +286,13 @@ export default function DemoPage() {
               <span style={{ color: '#E85D04' }}>in action</span>
             </h1>
             <p className="text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
-              Three fully interactive UI modules — from hotel admin operations to kitchen management
-              and guest concierge — all showcasing the full power of the Ownstay platform.
+              Fully interactive UI modules showcasing the depth and power of the Ownstay hotel
+              orchestration and automated guest experience platform.
             </p>
           </div>
 
           {/* Cards Grid */}
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {demos.map((demo) => (
               <Link key={demo.id} href={demo.href} className="group block">
                 <div

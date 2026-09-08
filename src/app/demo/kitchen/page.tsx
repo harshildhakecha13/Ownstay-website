@@ -23,6 +23,172 @@ interface StockItem {
   status: 'ok' | 'low' | 'out';
 }
 
+export interface MenuItem {
+  id: string;
+  name: string;
+  category: 'Mains' | 'Appetizers' | 'Desserts' | 'Beverages';
+  price: string;
+  isAvailable: boolean;
+  station: string;
+  isTodaySpecial?: boolean;
+}
+
+const initialMenuItems: MenuItem[] = [
+  {
+    id: 'M-101',
+    name: 'Butter Chicken',
+    category: 'Mains',
+    price: '$22.00',
+    isAvailable: true,
+    station: 'Indian / Tandoor',
+    isTodaySpecial: true,
+  },
+  {
+    id: 'M-102',
+    name: 'Garlic Naan',
+    category: 'Appetizers',
+    price: '$4.50',
+    isAvailable: true,
+    station: 'Indian / Tandoor',
+    isTodaySpecial: true,
+  },
+  {
+    id: 'M-103',
+    name: 'Paneer Tikka',
+    category: 'Appetizers',
+    price: '$14.00',
+    isAvailable: true,
+    station: 'Indian / Tandoor',
+    isTodaySpecial: false,
+  },
+  {
+    id: 'M-104',
+    name: 'Truffle Penne Pasta',
+    category: 'Mains',
+    price: '$24.00',
+    isAvailable: true,
+    station: 'Continental',
+    isTodaySpecial: true,
+  },
+  {
+    id: 'M-105',
+    name: 'Margherita Pizza',
+    category: 'Mains',
+    price: '$18.00',
+    isAvailable: true,
+    station: 'Bakery',
+    isTodaySpecial: false,
+  },
+  {
+    id: 'M-106',
+    name: 'Tandoori Platter',
+    category: 'Mains',
+    price: '$28.00',
+    isAvailable: true,
+    station: 'Indian / Tandoor',
+    isTodaySpecial: true,
+  },
+  {
+    id: 'M-107',
+    name: 'Lassi',
+    category: 'Beverages',
+    price: '$5.50',
+    isAvailable: true,
+    station: 'Beverage & Bar',
+    isTodaySpecial: true,
+  },
+  {
+    id: 'M-108',
+    name: 'Club Sandwich',
+    category: 'Mains',
+    price: '$15.00',
+    isAvailable: true,
+    station: 'Continental',
+    isTodaySpecial: false,
+  },
+  {
+    id: 'M-109',
+    name: 'Fresh Juice',
+    category: 'Beverages',
+    price: '$6.00',
+    isAvailable: true,
+    station: 'Beverage & Bar',
+    isTodaySpecial: false,
+  },
+  {
+    id: 'M-110',
+    name: 'Grilled Salmon',
+    category: 'Mains',
+    price: '$29.00',
+    isAvailable: true,
+    station: 'Grill',
+    isTodaySpecial: true,
+  },
+  {
+    id: 'M-111',
+    name: 'Caesar Salad',
+    category: 'Appetizers',
+    price: '$12.00',
+    isAvailable: true,
+    station: 'Salad',
+    isTodaySpecial: false,
+  },
+  {
+    id: 'M-112',
+    name: 'Pasta Arrabiata',
+    category: 'Mains',
+    price: '$19.00',
+    isAvailable: true,
+    station: 'Continental',
+    isTodaySpecial: false,
+  },
+  {
+    id: 'M-113',
+    name: 'Tiramisu',
+    category: 'Desserts',
+    price: '$9.50',
+    isAvailable: true,
+    station: 'Dessert',
+    isTodaySpecial: true,
+  },
+  {
+    id: 'M-114',
+    name: 'Biryani Bowl',
+    category: 'Mains',
+    price: '$21.00',
+    isAvailable: true,
+    station: 'Indian / Tandoor',
+    isTodaySpecial: false,
+  },
+  {
+    id: 'M-115',
+    name: 'Pancake Stack',
+    category: 'Mains',
+    price: '$11.00',
+    isAvailable: true,
+    station: 'Bakery',
+    isTodaySpecial: false,
+  },
+  {
+    id: 'M-116',
+    name: 'Coffee',
+    category: 'Beverages',
+    price: '$4.00',
+    isAvailable: true,
+    station: 'Beverage & Bar',
+    isTodaySpecial: false,
+  },
+  {
+    id: 'M-117',
+    name: 'Veg Thali',
+    category: 'Mains',
+    price: '$23.00',
+    isAvailable: true,
+    station: 'Indian / Tandoor',
+    isTodaySpecial: true,
+  },
+];
+
 const initialTickets: Ticket[] = [
   {
     id: 'T-041',
@@ -171,10 +337,12 @@ function KanbanColumn({
   status,
   tickets,
   onMove,
+  menuItems,
 }: {
   status: TicketStatus;
   tickets: Ticket[];
   onMove: (id: string, to: TicketStatus) => void;
+  menuItems: MenuItem[];
 }) {
   const meta = statusMeta[status];
   const nextStatus: Record<TicketStatus, TicketStatus | null> = {
@@ -197,43 +365,76 @@ function KanbanColumn({
         </span>
       </div>
       <div className="flex flex-col gap-3">
-        {tickets.map((t) => (
-          <div
-            key={t.id}
-            className="bg-white rounded-xl border p-3"
-            style={{ borderColor: '#EAEAEA', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}
-          >
-            <div className="flex items-start justify-between mb-1.5">
-              <div>
-                <div className="text-xs font-bold text-gray-900">{t.id}</div>
-                <div className="text-[10px] text-gray-500">{t.table}</div>
-              </div>
-              <div
-                className="text-[9px] font-bold px-2 py-0.5 rounded-full"
-                style={{ background: sourceBadge[t.source], color: '#555' }}
-              >
-                {t.source}
-              </div>
-            </div>
-            <div className="flex flex-col gap-1 mb-2">
-              {t.items.map((item, i) => (
-                <div key={i} className="text-[11px] text-gray-700">
-                  • {item.name}
-                  {item.mods && <span className="text-gray-400"> ({item.mods})</span>}
+        {tickets.map((t) => {
+          const hasUnavailableItems = t.items.some((item) => {
+            return menuItems.some(
+              (m) => !m.isAvailable && item.name.toLowerCase().includes(m.name.toLowerCase())
+            );
+          });
+          return (
+            <div
+              key={t.id}
+              className={`bg-white rounded-xl border p-3 transition-all duration-300 ${hasUnavailableItems ? 'border-red-200 ring-2 ring-red-500/5 bg-red-50/10' : ''}`}
+              style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}
+            >
+              <div className="flex items-start justify-between mb-1.5">
+                <div>
+                  <div className="text-xs font-bold text-gray-900">{t.id}</div>
+                  <div className="text-[10px] text-gray-500">{t.table}</div>
                 </div>
-              ))}
+                <div
+                  className="text-[9px] font-bold px-2 py-0.5 rounded-full"
+                  style={{ background: sourceBadge[t.source], color: '#555' }}
+                >
+                  {t.source}
+                </div>
+              </div>
+
+              {hasUnavailableItems && (
+                <div className="mb-2 bg-red-50 text-red-600 border border-red-100 rounded-lg p-1.5 flex items-center gap-1 text-[9px] font-bold animate-pulse">
+                  <span>⚠️ Item Out of Stock</span>
+                </div>
+              )}
+
+              <div className="flex flex-col gap-1 mb-2">
+                {t.items.map((item, i) => {
+                  const isItemUnavailable = menuItems.some(
+                    (m) => !m.isAvailable && item.name.toLowerCase().includes(m.name.toLowerCase())
+                  );
+                  return (
+                    <div
+                      key={i}
+                      className={`text-[11px] flex items-center justify-between ${
+                        isItemUnavailable
+                          ? 'text-red-500 font-semibold line-through decoration-red-400'
+                          : 'text-gray-700'
+                      }`}
+                    >
+                      <span>
+                        • {item.name}
+                        {item.mods && <span className="text-gray-400"> ({item.mods})</span>}
+                      </span>
+                      {isItemUnavailable && (
+                        <span className="text-[8px] font-bold uppercase px-1 py-0.2 bg-red-100 text-red-700 rounded ml-1 tracking-wider">
+                          OUT
+                        </span>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+              <SlaTimer minutes={t.minutes} sla={t.sla} />
+              {nextStatus[status] && (
+                <button
+                  onClick={() => onMove(t.id, nextStatus[status]!)}
+                  className="mt-2 w-full text-[10px] font-bold py-1.5 rounded-lg border transition-colors hover:bg-orange-50 hover:border-orange-300 hover:text-orange-600 border-gray-200 text-gray-500"
+                >
+                  Mark as {statusMeta[nextStatus[status]!].label} →
+                </button>
+              )}
             </div>
-            <SlaTimer minutes={t.minutes} sla={t.sla} />
-            {nextStatus[status] && (
-              <button
-                onClick={() => onMove(t.id, nextStatus[status]!)}
-                className="mt-2 w-full text-[10px] font-bold py-1.5 rounded-lg border transition-colors hover:bg-orange-50 hover:border-orange-300 hover:text-orange-600 border-gray-200 text-gray-500"
-              >
-                Mark as {statusMeta[nextStatus[status]!].label} →
-              </button>
-            )}
-          </div>
-        ))}
+          );
+        })}
         {tickets.length === 0 && (
           <div className="border-2 border-dashed border-gray-100 rounded-xl p-6 text-center text-xs text-gray-400">
             No tickets
@@ -244,11 +445,49 @@ function KanbanColumn({
   );
 }
 
-type TabKey = 'kds' | 'stations' | 'inventory';
+type TabKey = 'kds' | 'stations' | 'inventory' | 'menu';
 
 export default function KitchenDemoPage() {
   const [activeTab, setActiveTab] = useState<TabKey>('kds');
   const [tickets, setTickets] = useState<Ticket[]>(initialTickets);
+  const [menuItems, setMenuItems] = useState<MenuItem[]>(initialMenuItems);
+  const [menuSearch, setMenuSearch] = useState('');
+  const [menuFilter, setMenuFilter] = useState<
+    'All' | 'Mains' | 'Appetizers' | 'Desserts' | 'Beverages' | 'Specials'
+  >('All');
+
+  // Add Item form state
+  const [newItemName, setNewItemName] = useState('');
+  const [newItemCategory, setNewItemCategory] = useState<
+    'Mains' | 'Appetizers' | 'Desserts' | 'Beverages'
+  >('Mains');
+  const [newItemPrice, setNewItemPrice] = useState('$18.50');
+  const [newItemStation, setNewItemStation] = useState('Continental');
+  const [newItemIsTodaySpecial, setNewItemIsTodaySpecial] = useState(true);
+  const [showAddForm, setShowAddForm] = useState(false);
+
+  const addNewMenuItem = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newItemName.trim()) return;
+
+    const id = `M-${100 + menuItems.length + 1}`;
+    const newItem: MenuItem = {
+      id,
+      name: newItemName.trim(),
+      category: newItemCategory,
+      price: newItemPrice.trim(),
+      isAvailable: true,
+      station: newItemStation.trim(),
+      isTodaySpecial: newItemIsTodaySpecial,
+    };
+
+    setMenuItems((prev) => [newItem, ...prev]);
+    setNewItemName('');
+    setNewItemPrice('$18.50');
+    setNewItemStation('Continental');
+    setNewItemIsTodaySpecial(true);
+    setShowAddForm(false);
+  };
 
   const moveTicket = (id: string, to: TicketStatus) => {
     setTickets((ts) => ts.map((t) => (t.id === id ? { ...t, status: to } : t)));
@@ -260,6 +499,7 @@ export default function KitchenDemoPage() {
     { key: 'kds', label: 'Live KDS Board', icon: '📋' },
     { key: 'stations', label: 'Station Capacity', icon: '⚡' },
     { key: 'inventory', label: 'Inventory & Stock', icon: '📦' },
+    { key: 'menu', label: 'Menu Availability', icon: '🍽️' },
   ];
 
   return (
@@ -328,6 +568,7 @@ export default function KitchenDemoPage() {
                   status={col}
                   tickets={tickets.filter((t) => t.status === col)}
                   onMove={moveTicket}
+                  menuItems={menuItems}
                 />
               ))}
             </div>
@@ -508,6 +749,322 @@ export default function KitchenDemoPage() {
                   })}
                 </tbody>
               </table>
+            </div>
+          </div>
+        )}
+
+        {/* Menu Availability */}
+        {activeTab === 'menu' && (
+          <div>
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+              <div>
+                <h2 className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400">
+                  Interactive Menu & Daily Specials Manager
+                </h2>
+                <p className="text-xs text-gray-500 mt-1">
+                  Manage active items for today&apos;s rotation, toggle live stock, or append fresh
+                  daily specials.
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setShowAddForm(!showAddForm)}
+                  className="bg-orange-500 hover:bg-orange-600 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold shadow-sm transition-colors flex items-center gap-1.5"
+                >
+                  ➕{' '}
+                  {showAddForm
+                    ? 'Close Custom Form'
+                    : "Add Today's New Dish".replace("'", '&apos;')}
+                </button>
+                <button
+                  onClick={() =>
+                    setMenuItems((prev) => prev.map((item) => ({ ...item, isAvailable: true })))
+                  }
+                  className="bg-white hover:bg-slate-50 text-gray-700 border border-gray-200 px-3.5 py-1.5 rounded-xl text-xs font-semibold shadow-sm transition-colors"
+                >
+                  🟢 Mark All Available
+                </button>
+              </div>
+            </div>
+
+            {/* Dynamic Add Item Form */}
+            {showAddForm && (
+              <form
+                onSubmit={addNewMenuItem}
+                className="bg-orange-50/40 border border-orange-100 rounded-2xl p-5 mb-6 shadow-sm animate-in fade-in duration-200"
+              >
+                <h3 className="text-xs font-bold text-gray-800 uppercase tracking-wider mb-4">
+                  Add Fresh Dish / Item to Today&apos;s Menu
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase">
+                      Item Name
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Rasmalai, Paneer Kofta"
+                      value={newItemName}
+                      onChange={(e) => setNewItemName(e.target.value)}
+                      className="bg-white border border-gray-200 rounded-xl px-3 py-2 text-xs text-gray-900 focus:outline-none focus:ring-1 focus:ring-orange-500"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase">
+                      Category
+                    </label>
+                    <select
+                      value={newItemCategory}
+                      onChange={(e) =>
+                        setNewItemCategory(
+                          e.target.value as 'Mains' | 'Appetizers' | 'Desserts' | 'Beverages'
+                        )
+                      }
+                      className="bg-white border border-gray-200 rounded-xl px-3 py-2 text-xs text-gray-900 focus:outline-none focus:ring-1 focus:ring-orange-500"
+                    >
+                      <option value="Mains">Mains</option>
+                      <option value="Appetizers">Appetizers</option>
+                      <option value="Desserts">Desserts</option>
+                      <option value="Beverages">Beverages</option>
+                    </select>
+                  </div>
+
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase">Price</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. $14.50"
+                      value={newItemPrice}
+                      onChange={(e) => setNewItemPrice(e.target.value)}
+                      className="bg-white border border-gray-200 rounded-xl px-3 py-2 text-xs text-gray-900 focus:outline-none focus:ring-1 focus:ring-orange-500"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[10px] font-bold text-gray-500 uppercase">
+                      Prep Station
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Indian / Tandoor, Bakery"
+                      value={newItemStation}
+                      onChange={(e) => setNewItemStation(e.target.value)}
+                      className="bg-white border border-gray-200 rounded-xl px-3 py-2 text-xs text-gray-900 focus:outline-none focus:ring-1 focus:ring-orange-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between mt-5 pt-4 border-t border-orange-100/60">
+                  <label className="flex items-center gap-2 text-xs text-gray-700 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={newItemIsTodaySpecial}
+                      onChange={(e) => setNewItemIsTodaySpecial(e.target.checked)}
+                      className="rounded border-gray-300 text-orange-500 focus:ring-orange-500"
+                    />
+                    <span>
+                      Highlight as <strong>Today&apos;s Special Menu Item</strong>
+                    </span>
+                  </label>
+                  <button
+                    type="submit"
+                    className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-xl text-xs font-bold transition-colors shadow-sm"
+                  >
+                    Add to Active Menu
+                  </button>
+                </div>
+              </form>
+            )}
+
+            {/* Quick Stats Panel */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+              <div className="bg-white border border-gray-100 rounded-2xl p-4 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">
+                <div className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">
+                  Total Menu Items
+                </div>
+                <div className="text-2xl font-bold text-gray-900 mt-1">{menuItems.length}</div>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-2xl p-4 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">
+                <div className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">
+                  Available Now
+                </div>
+                <div className="text-2xl font-bold text-emerald-600 mt-1">
+                  {menuItems.filter((i) => i.isAvailable).length}
+                </div>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-2xl p-4 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">
+                <div className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">
+                  Flagged Out of Stock
+                </div>
+                <div className="text-2xl font-bold text-rose-600 mt-1">
+                  {menuItems.filter((i) => !i.isAvailable).length}
+                </div>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-2xl p-4 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">
+                <div className="text-[10px] uppercase font-bold text-amber-500 tracking-wider">
+                  Today&apos;s Specials
+                </div>
+                <div className="text-2xl font-bold text-amber-600 mt-1">
+                  {menuItems.filter((i) => i.isTodaySpecial).length}
+                </div>
+              </div>
+            </div>
+
+            {/* Filters & Search */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-4 mb-6 shadow-[0_4px_12px_rgba(0,0,0,0.02)] flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex flex-wrap gap-1 w-full sm:w-auto">
+                {(['All', 'Mains', 'Appetizers', 'Desserts', 'Beverages', 'Specials'] as const).map(
+                  (cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => setMenuFilter(cat)}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all ${
+                        menuFilter === cat
+                          ? 'bg-orange-50 border-orange-200 text-orange-600'
+                          : 'bg-white border-gray-200 text-gray-600 hover:bg-slate-50'
+                      }`}
+                    >
+                      {cat === 'Specials' ? "✨ Today's Specials".replace("'", '&apos;') : cat}
+                    </button>
+                  )
+                )}
+              </div>
+              <div className="relative w-full sm:w-64">
+                <input
+                  type="text"
+                  placeholder="Search dish or station..."
+                  value={menuSearch}
+                  onChange={(e) => setMenuSearch(e.target.value)}
+                  className="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500"
+                />
+              </div>
+            </div>
+
+            {/* Items Table */}
+            <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-gray-100 bg-gray-50">
+                      <th className="text-left text-[10px] font-bold uppercase tracking-wider text-gray-400 px-5 py-3">
+                        Dish / Item Name
+                      </th>
+                      <th className="text-left text-[10px] font-bold uppercase tracking-wider text-gray-400 px-3 py-3">
+                        Category
+                      </th>
+                      <th className="text-left text-[10px] font-bold uppercase tracking-wider text-gray-400 px-3 py-3">
+                        Price
+                      </th>
+                      <th className="text-left text-[10px] font-bold uppercase tracking-wider text-gray-400 px-3 py-3">
+                        Kitchen Prep Station
+                      </th>
+                      <th className="text-left text-[10px] font-bold uppercase tracking-wider text-gray-400 px-3 py-3">
+                        Today&apos;s Special
+                      </th>
+                      <th className="text-left text-[10px] font-bold uppercase tracking-wider text-gray-400 px-3 py-3">
+                        Current Status
+                      </th>
+                      <th className="text-right text-[10px] font-bold uppercase tracking-wider text-gray-400 px-5 py-3">
+                        Toggle Availability
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {menuItems
+                      .filter((item) => {
+                        const matchesCategory =
+                          menuFilter === 'All' ||
+                          (menuFilter === 'Specials' && item.isTodaySpecial) ||
+                          item.category === menuFilter;
+                        const matchesSearch =
+                          item.name.toLowerCase().includes(menuSearch.toLowerCase()) ||
+                          item.station.toLowerCase().includes(menuSearch.toLowerCase());
+                        return matchesCategory && matchesSearch;
+                      })
+                      .map((item) => (
+                        <tr
+                          key={item.id}
+                          className="border-b border-gray-50 last:border-0 hover:bg-slate-50/50 transition-colors"
+                        >
+                          <td className="px-5 py-3.5">
+                            <div>
+                              <div className="flex items-center gap-1.5">
+                                <div className="text-sm font-bold text-gray-800">{item.name}</div>
+                                {item.isTodaySpecial && (
+                                  <span className="text-[10px] bg-amber-50 text-amber-700 font-bold px-1.5 py-0.2 rounded flex items-center gap-0.5 border border-amber-200">
+                                    ★ Today&apos;s Menu
+                                  </span>
+                                )}
+                              </div>
+                              <div className="text-[10px] text-gray-400 mt-0.5">ID: {item.id}</div>
+                            </div>
+                          </td>
+                          <td className="px-3 py-3.5">
+                            <span className="text-xs bg-slate-100 text-gray-600 font-semibold px-2 py-0.5 rounded-full">
+                              {item.category}
+                            </span>
+                          </td>
+                          <td className="px-3 py-3.5 text-xs font-bold text-gray-700">
+                            {item.price}
+                          </td>
+                          <td className="px-3 py-3.5 text-xs text-gray-500 font-medium">
+                            {item.station}
+                          </td>
+                          <td className="px-3 py-3.5">
+                            <button
+                              onClick={() => {
+                                setMenuItems((prev) =>
+                                  prev.map((m) =>
+                                    m.id === item.id
+                                      ? { ...m, isTodaySpecial: !m.isTodaySpecial }
+                                      : m
+                                  )
+                                );
+                              }}
+                              className={`text-[10px] font-bold px-2 py-1 rounded-xl border transition-all ${
+                                item.isTodaySpecial
+                                  ? 'bg-amber-500 text-white border-amber-600 shadow-sm'
+                                  : 'bg-white text-gray-500 border-gray-200 hover:bg-slate-50'
+                              }`}
+                            >
+                              {item.isTodaySpecial ? '★ Special' : '☆ Standard'}
+                            </button>
+                          </td>
+                          <td className="px-3 py-3.5">
+                            <span
+                              className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
+                                item.isAvailable
+                                  ? 'bg-green-50 text-green-700 border-green-200'
+                                  : 'bg-red-50 text-red-700 border-red-200 animate-pulse'
+                              }`}
+                            >
+                              {item.isAvailable ? '🟢 Available' : '🔴 Out of Stock'}
+                            </span>
+                          </td>
+                          <td className="px-5 py-3.5 text-right">
+                            <button
+                              onClick={() => {
+                                setMenuItems((prev) =>
+                                  prev.map((m) =>
+                                    m.id === item.id ? { ...m, isAvailable: !m.isAvailable } : m
+                                  )
+                                );
+                              }}
+                              className={`text-xs font-bold px-3 py-1.5 rounded-xl border transition-all shadow-sm ${
+                                item.isAvailable
+                                  ? 'bg-rose-50 border-rose-200 text-rose-600 hover:bg-rose-100'
+                                  : 'bg-green-50 border-green-200 text-green-600 hover:bg-green-100'
+                              }`}
+                            >
+                              {item.isAvailable ? 'Set Out of Stock' : 'Make Available'}
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         )}

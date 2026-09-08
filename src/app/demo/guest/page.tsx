@@ -178,6 +178,9 @@ function FoodTab() {
   const [cart, setCart] = useState<DishItem[]>(dishes.map((d) => ({ ...d, qty: 0 })));
   const [checkout, setCheckout] = useState(false);
   const [payMethod, setPayMethod] = useState('room');
+  const [showFullMenu, setShowFullMenu] = useState(false);
+  const [menuSearch, setMenuSearch] = useState('');
+  const [catFilter, setCatFilter] = useState<'all' | 'mains' | 'drinks' | 'desserts'>('all');
 
   const update = (id: string, delta: number) => {
     setCart((prev) =>
@@ -188,13 +191,36 @@ function FoodTab() {
   const count = cart.reduce((s, d) => s + d.qty, 0);
 
   return (
-    <div className="flex-1 overflow-y-auto flex flex-col">
-      <div className="px-4 py-3 bg-white border-b border-gray-100">
-        <div className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-0.5">
-          In-Room Dining
+    <div className="flex-1 overflow-y-auto flex flex-col relative">
+      <div className="px-4 py-3 bg-white border-b border-gray-100 flex items-center justify-between">
+        <div>
+          <div className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-0.5">
+            In-Room Dining
+          </div>
+          <h3 className="text-sm font-bold text-gray-900">Order to Suite 402</h3>
         </div>
-        <h3 className="text-sm font-bold text-gray-900">Order to Suite 402</h3>
+        <button
+          onClick={() => setShowFullMenu(true)}
+          className="flex items-center gap-1.5 text-xs font-bold text-orange-600 bg-orange-50 border border-orange-200 px-3 py-1.5 rounded-full hover:bg-orange-100 transition-colors shadow-xs"
+        >
+          <span>📖 View Menu</span>
+        </button>
       </div>
+
+      {/* Menu banner */}
+      <div className="mx-4 mt-3 p-3 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl text-white flex items-center justify-between shadow-xs">
+        <div>
+          <div className="text-xs font-bold">✨ Chef&apos;s Seasonal Specials</div>
+          <div className="text-[10px] opacity-90">Browse full digital menu & dietary guides</div>
+        </div>
+        <button
+          onClick={() => setShowFullMenu(true)}
+          className="bg-white text-orange-600 text-[10px] font-bold px-3 py-1.5 rounded-xl hover:bg-orange-50 transition-colors"
+        >
+          View Menu →
+        </button>
+      </div>
+
       <div className="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-3">
         {cart.map((d) => (
           <div key={d.id} className="bg-white border border-gray-100 rounded-2xl p-3 shadow-sm">
@@ -330,6 +356,126 @@ function FoodTab() {
             >
               Confirm Order ✓
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Full Digital Menu Viewer Overlay */}
+      {showFullMenu && (
+        <div className="absolute inset-0 bg-white z-20 flex flex-col">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 bg-white">
+            <div>
+              <div className="text-[10px] font-bold uppercase tracking-wider text-orange-600">
+                In-Room Dining
+              </div>
+              <h3 className="text-sm font-extrabold text-gray-900">Complete Digital Menu</h3>
+            </div>
+            <button
+              onClick={() => setShowFullMenu(false)}
+              className="w-8 h-8 rounded-full bg-gray-100 text-gray-600 font-bold text-sm flex items-center justify-center hover:bg-gray-200"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div className="p-3 bg-gray-50 border-b border-gray-100 flex flex-col gap-2">
+            <input
+              type="text"
+              placeholder="Search menu or ingredients..."
+              value={menuSearch}
+              onChange={(e) => setMenuSearch(e.target.value)}
+              className="w-full border border-gray-200 rounded-xl px-3 py-2 text-xs bg-white focus:outline-none focus:border-orange-400"
+            />
+            <div className="flex gap-1.5 overflow-x-auto text-[10px] font-bold">
+              {[
+                { id: 'all', label: 'All Items' },
+                { id: 'mains', label: '🍛 Mains' },
+                { id: 'drinks', label: '🍹 Drinks' },
+                { id: 'desserts', label: '🍨 Desserts' },
+              ].map((c) => (
+                <button
+                  key={c.id}
+                  onClick={() => setCatFilter(c.id as any)}
+                  className={`px-3 py-1 rounded-full whitespace-nowrap border ${
+                    catFilter === c.id
+                      ? 'bg-orange-500 text-white border-orange-500'
+                      : 'bg-white text-gray-600 border-gray-200'
+                  }`}
+                >
+                  {c.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-3">
+            {dishes
+              .filter((d) => {
+                const matchesSearch =
+                  !menuSearch ||
+                  d.name.toLowerCase().includes(menuSearch.toLowerCase()) ||
+                  d.desc.toLowerCase().includes(menuSearch.toLowerCase());
+                return matchesSearch;
+              })
+              .map((d) => {
+                const currentQty = cart.find((item) => item.id === d.id)?.qty || 0;
+                return (
+                  <div
+                    key={d.id}
+                    className="bg-white border border-gray-100 rounded-2xl p-3 shadow-xs"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center text-2xl shrink-0">
+                        {d.emoji}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs font-bold text-gray-800 mb-0.5">{d.name}</div>
+                        <div className="text-[10px] text-gray-400 mb-1 leading-snug">{d.desc}</div>
+                        <div className="flex flex-wrap gap-1 mb-1">
+                          {d.allergens.map((a) => (
+                            <span
+                              key={a}
+                              className="text-[9px] font-bold px-1.5 py-0.5 bg-amber-50 text-amber-700 border border-amber-200 rounded-full"
+                            >
+                              {a}
+                            </span>
+                          ))}
+                          <span className="text-[9px] text-gray-400">⏱ {d.eta}</span>
+                        </div>
+                        <div className="text-[11px] font-bold text-orange-600">₹{d.price}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-end gap-2 mt-2">
+                      <button
+                        onClick={() => update(d.id, 1)}
+                        className="text-[11px] font-bold px-3 py-1.5 rounded-full bg-orange-500 text-white hover:bg-orange-600"
+                      >
+                        + Add {currentQty > 0 ? `(${currentQty})` : ''}
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
+
+          <div className="p-3 border-t border-gray-100 bg-white flex items-center justify-between gap-2">
+            <button
+              onClick={() => setShowFullMenu(false)}
+              className="flex-1 bg-gray-100 text-gray-700 text-xs font-bold py-2.5 rounded-xl hover:bg-gray-200"
+            >
+              Back to Order
+            </button>
+            {count > 0 && (
+              <button
+                onClick={() => {
+                  setShowFullMenu(false);
+                  setCheckout(true);
+                }}
+                className="flex-2 bg-orange-500 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-orange-600"
+              >
+                Checkout ({count}) · ₹{total}
+              </button>
+            )}
           </div>
         </div>
       )}

@@ -4,6 +4,7 @@ import HeroSection from '@/app/components/HeroSection';
 import SocialProofSection from '@/app/components/SocialProofSection';
 import ProblemSection from '@/app/components/ProblemSection';
 import SolutionSection from '@/app/components/SolutionSection';
+import ProductShowroom from '@/app/components/ProductShowroom';
 import FeaturesSection from '@/app/components/FeaturesSection';
 import GuestJourneySection from '@/app/components/GuestJourneySection';
 import HowItWorksSection from '@/app/components/HowItWorksSection';
@@ -25,6 +26,7 @@ export default function HomePage() {
       <SocialProofSection />
       <ProblemSection />
       <SolutionSection />
+      <ProductShowroom />
       <FeaturesSection />
       <HotelTypesSection />
       <MetricsSection />
