@@ -10,14 +10,12 @@ import { navigationConfig, NavigationItem } from './header/navigationData';
 function ProductVisual3D({
   kind,
   imageSrc,
-  tag,
 }: {
   kind: string;
   imageSrc: string;
-  tag?: string;
 }) {
   return (
-    <div className="relative h-[160px] w-full overflow-hidden rounded-t-2xl bg-slate-900 group">
+    <div className="relative h-[140px] w-full overflow-hidden rounded-t-2xl bg-slate-900 group">
       {/* 3D Render Image */}
       <img
         src={imageSrc}
@@ -27,10 +25,10 @@ function ProductVisual3D({
       />
 
       {/* Atmospheric Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent pointer-events-none" />
       <div className="absolute inset-0 ring-1 ring-inset ring-white/15 rounded-t-2xl pointer-events-none" />
 
-      {/* Floating 3D Badge */}
+      {/* Floating Badge */}
       <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/80 backdrop-blur-md border border-white/20 text-[10px] font-bold text-white shadow-lg">
         {kind === 'platform' ? (
           <>
@@ -40,20 +38,10 @@ function ProductVisual3D({
         ) : (
           <>
             <span className="text-primary">✦</span>
-            <span>40+ Languages • 24/7 AI</span>
+            <span>40+ Languages AI</span>
           </>
         )}
       </div>
-
-      {/* Bottom Floating Tag */}
-      {tag && (
-        <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-[11px] font-medium text-slate-200">
-          <span className="truncate">{tag}</span>
-          <span className="text-primary font-bold text-xs group-hover:translate-x-0.5 transition-transform">
-            →
-          </span>
-        </div>
-      )}
     </div>
   );
 }
@@ -361,7 +349,7 @@ export default function Header() {
                       onClick={() => setActiveMenu(null)}
                       className="group block bg-white rounded-2xl border border-border shadow-sm hover:shadow-xl hover:border-primary/50 transition-all duration-300 overflow-hidden flex flex-col"
                     >
-                      <ProductVisual3D kind={item.visual} imageSrc={item.imageSrc} tag={item.tag} />
+                      <ProductVisual3D kind={item.visual} imageSrc={item.imageSrc} />
                       <div className="p-4 bg-white">
                         <div className="text-sm font-bold text-foreground group-hover:text-primary transition-colors flex items-center justify-between">
                           <span>{item.title}</span>
@@ -797,13 +785,13 @@ export default function Header() {
   );
 }
 
-// Sub-component for individual item row with Icon, Label, Description & Badge
+// Sub-component for individual item row with Icon, Label & Clean Single-Line Subtext
 function NavigationRow({ item, onClick }: { item: NavigationItem; onClick?: () => void }) {
   return (
     <Link
       href={item.href}
       onClick={onClick}
-      className="group flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-50 transition-colors"
+      className="group flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-100/80 transition-all duration-150"
     >
       {item.icon && (
         <div className="w-7 h-7 rounded-lg bg-slate-100 text-slate-600 group-hover:bg-primary/10 group-hover:text-primary flex items-center justify-center shrink-0 mt-0.5 transition-colors">
@@ -811,24 +799,19 @@ function NavigationRow({ item, onClick }: { item: NavigationItem; onClick?: () =
         </div>
       )}
       <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-1.5">
-          <span className="text-xs font-bold text-foreground group-hover:text-primary transition-colors">
-            {item.label}
-          </span>
-          {item.badge && (
-            <span className="text-[9px] font-bold uppercase tracking-wider bg-orange-100 text-orange-800 px-1.5 py-0.2 rounded-md">
-              {item.badge}
-            </span>
-          )}
-        </div>
-        <p className="text-[11px] text-muted-foreground line-clamp-1 leading-normal mt-0.5">
-          {item.description}
-        </p>
+        <span className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors block truncate">
+          {item.label}
+        </span>
+        {item.description && (
+          <p className="text-[11px] text-muted-foreground/80 font-normal leading-tight truncate mt-0.5">
+            {item.description}
+          </p>
+        )}
       </div>
       <Icon
         name="ChevronRightIcon"
         size={12}
-        className="text-muted-foreground/40 group-hover:text-primary group-hover:translate-x-0.5 transition-all opacity-0 group-hover:opacity-100 mt-1 shrink-0"
+        className="text-muted-foreground/30 group-hover:text-primary group-hover:translate-x-0.5 transition-all opacity-0 group-hover:opacity-100 shrink-0 mt-1"
       />
     </Link>
   );
