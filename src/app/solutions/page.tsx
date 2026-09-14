@@ -150,11 +150,11 @@ export default function SolutionsIndexPage() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
-                href="/demo"
+                href="/contact"
                 className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-6 py-3.5 rounded-xl hover:opacity-95 transition-all shadow-md"
               >
-                <Icon name="PlayIcon" size={18} variant="solid" />
-                Launch Interactive Sandbox
+                <Icon name="CalendarDaysIcon" size={18} variant="solid" />
+                Schedule Guided Walkthrough
               </Link>
               <Link
                 href="/case-studies"
@@ -193,10 +193,10 @@ export default function SolutionsIndexPage() {
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
-                    href="/demo"
+                    href="/contact"
                     className="inline-flex items-center gap-2 bg-primary text-white font-bold px-7 py-3.5 rounded-xl hover:bg-orange-600 transition-all shadow-lg"
                   >
-                    Open Live Sandbox Suite
+                    Schedule Guided Walkthrough
                     <Icon name="ArrowRightIcon" size={18} />
                   </Link>
                   <Link

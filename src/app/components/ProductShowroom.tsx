@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Link from 'next/link';
 import Icon from '@/components/ui/AppIcon';
 
 type ProductTab = 'guest' | 'frontdesk' | 'kitchen';
@@ -304,8 +305,8 @@ export default function ProductShowroom() {
                               </span>
                             </button>
 
-                            <a
-                              href="/demo"
+                            <Link
+                              href="/product/ownstay-ai-receptionist"
                               className="bg-white border border-slate-100 rounded-xl p-3 text-left hover:border-orange-200 transition-all shadow-sm block"
                             >
                               <div className="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center text-purple-600 mb-2">
@@ -317,7 +318,7 @@ export default function ProductShowroom() {
                               <span className="text-[9px] text-slate-500 block mt-0.5">
                                 24/7 AI Concierge
                               </span>
-                            </a>
+                            </Link>
                           </div>
 
                           {/* Quick status timeline */}

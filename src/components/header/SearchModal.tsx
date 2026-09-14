@@ -80,38 +80,10 @@ const SEARCH_ITEMS: SearchResult[] = [
 
   // Interactive Live Demos
   {
-    title: 'Live Demo: Admin Operations Suite',
-    category: 'Interactive Demo',
-    description: 'Experience the real-time front desk KPI dashboard and check-in timeline.',
-    href: '/demo/admin',
-    icon: 'ComputerDesktopIcon',
-  },
-  {
-    title: 'Live Demo: Kitchen Operations & KDS',
-    category: 'Interactive Demo',
-    description: 'Interactive kitchen display board with live ticket routing.',
-    href: '/demo/kitchen',
-    icon: 'FireIcon',
-  },
-  {
-    title: 'Live Demo: Guest Concierge Mobile Portal',
-    category: 'Interactive Demo',
-    description: 'Interactive guest portal for in-room dining and housekeeping requests.',
-    href: '/demo/guest',
-    icon: 'DevicePhoneMobileIcon',
-  },
-  {
-    title: 'Live Demo: Guest CRM & Profiles Sandbox',
-    category: 'Interactive Demo',
-    description: 'VIP guest profiles database, preferences, stay history, and chat simulator.',
-    href: '/demo/crm',
-    icon: 'UsersIcon',
-  },
-  {
-    title: 'Interactive Demos Hub',
-    category: 'Interactive Demo',
-    description: 'Explore all 4 live interactive product sandbox environments.',
-    href: '/demo',
+    title: 'Schedule a Live Guided Demo',
+    category: 'Request Demo',
+    description: 'Book a 20-minute tailored hotel platform walkthrough with our product team.',
+    href: '/contact',
     icon: 'SparklesIcon',
   },
 
@@ -245,7 +217,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             onClick={() => setQuery('demo')}
             className="px-2.5 py-1 rounded-full bg-primary/10 text-primary font-semibold hover:bg-primary/20 transition-colors shrink-0"
           >
-            Live Demos
+            Request Demo
           </button>
           <button
             onClick={() => setQuery('receptionist')}

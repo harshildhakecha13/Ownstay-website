@@ -130,10 +130,10 @@ export default function ContactForm() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
-            href="/demo"
+            href="/product/ownstay-platform"
             className="w-full sm:w-auto px-6 py-3 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary/90 transition-colors shadow-sm"
           >
-            Explore Interactive Live Demos Now →
+            Explore Our Product Platform →
           </Link>
           <button
             onClick={() => setSubmitted(false)}

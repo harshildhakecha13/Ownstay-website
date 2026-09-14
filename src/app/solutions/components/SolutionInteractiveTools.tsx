@@ -313,10 +313,10 @@ export default function SolutionInteractiveTools({ solutionTitle, category, badg
               <strong className="text-primary">Outcome:</strong> {scenarios[activeScenario].result}
             </div>
             <Link
-              href="/demo"
+              href="/contact"
               className="shrink-0 text-xs font-bold text-primary hover:text-orange-700 flex items-center gap-1"
             >
-              Test in Sandbox →
+              Book a Walkthrough →
             </Link>
           </div>
         </div>

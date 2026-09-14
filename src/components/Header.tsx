@@ -7,13 +7,7 @@ import Icon from '@/components/ui/AppIcon';
 import { navigationConfig, NavigationItem } from './header/navigationData';
 
 // 3D Visual Cards for the Product Mega Menu
-function ProductVisual3D({
-  kind,
-  imageSrc,
-}: {
-  kind: string;
-  imageSrc: string;
-}) {
+function ProductVisual3D({ kind, imageSrc }: { kind: string; imageSrc: string }) {
   return (
     <div className="relative h-[140px] w-full overflow-hidden rounded-t-2xl bg-slate-900 group">
       {/* 3D Render Image */}
@@ -152,9 +146,11 @@ export default function Header() {
   const _isActivePath = (path: string) => pathname?.startsWith(path);
 
   const navItems = [
-    { label: 'Product', menuId: 'product', hasDropdown: true },
-    { label: 'Solutions', menuId: 'solutions', hasDropdown: true },
-    { label: 'Resources', menuId: 'resources', hasDropdown: true },
+    { label: 'Home', href: '/', isActive: true },
+    { label: 'Features', href: '#features' },
+    { label: 'Solutions', href: '/solutions', menuId: 'solutions', hasDropdown: true },
+    { label: 'Pricing', href: '/contact' },
+    { label: 'About', href: '/about' },
   ];
 
   // Search Results Filter
@@ -202,10 +198,10 @@ export default function Header() {
       badge: 'AI RevPAR',
     },
     {
-      name: 'Interactive Demo & Sandbox Suite',
-      category: 'Sandbox',
-      href: '/demo',
-      badge: 'Live 3-in-1',
+      name: 'Schedule Live Platform Walkthrough',
+      category: 'Request Demo',
+      href: '/contact',
+      badge: '14-Day Pilot',
     },
     { name: 'API Reference & REST Docs', category: 'Docs', href: '/docs', badge: 'v2.4' },
     {
@@ -235,84 +231,94 @@ export default function Header() {
       item.badge.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const isDarkHero = pathname === '/';
+  const isScrolledOrLight = scrolled || !isDarkHero;
+
   return (
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? 'bg-white/95 backdrop-blur-md border-b border-border shadow-sm py-2.5'
-            : 'bg-white/70 backdrop-blur-sm border-b border-border/40 py-4'
+          isScrolledOrLight
+            ? 'bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm py-3'
+            : 'bg-transparent py-5'
         }`}
         role="banner"
       >
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative flex items-center h-11 justify-between">
+        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12 relative flex items-center h-12 justify-between">
           {/* Left: Brand Logo */}
           <div className="flex items-center shrink-0">
-            <Link href="/" className="flex items-center gap-2.5 group" aria-label="Ownstay home">
+            <Link href="/" className="flex items-center gap-3 group" aria-label="Ownstay home">
               <AppLogo size={32} />
-              <div className="flex flex-col justify-center">
-                <span className="font-bold text-[19px] text-foreground tracking-tight leading-none mb-[2px]">
-                  Ownstay
-                </span>
-                <span className="text-[8px] font-bold text-muted-foreground tracking-[0.2em] uppercase leading-none">
-                  BY OWNTHUM AI
-                </span>
-              </div>
+              <span
+                className={`font-semibold text-2xl tracking-tight leading-none transition-colors duration-200 ${
+                  isScrolledOrLight ? 'text-slate-900' : 'text-white'
+                }`}
+              >
+                Ownstay
+              </span>
             </Link>
           </div>
 
           {/* Center: Desktop Navigation Bar */}
-          <nav className="hidden lg:flex items-center gap-8 h-full" aria-label="Main navigation">
+          <nav className="hidden lg:flex items-center gap-10 h-full" aria-label="Main navigation">
             {navItems.map((item) => {
-              const isMenuOpen = activeMenu === item.menuId;
+              const isCurrent =
+                item.href === '/'
+                  ? pathname === '/'
+                  : item.href.startsWith('#')
+                    ? false
+                    : pathname?.startsWith(item.href);
               return (
                 <div
                   key={item.label}
-                  className="relative h-full flex items-center"
-                  onMouseEnter={() => openMenu(item.menuId)}
+                  className="relative h-full flex flex-col justify-center items-center"
+                  onMouseEnter={() => item.hasDropdown && item.menuId && openMenu(item.menuId)}
                   onMouseLeave={closeMenu}
                 >
-                  <button
-                    className={`flex items-center text-sm font-semibold transition-colors duration-200 py-2 ${
-                      isMenuOpen ? 'text-primary' : 'text-foreground/80 hover:text-foreground'
+                  <Link
+                    href={item.href}
+                    className={`flex items-center text-[15px] transition-colors duration-200 py-1 ${
+                      isCurrent
+                        ? isScrolledOrLight
+                          ? 'text-slate-900 font-semibold'
+                          : 'text-white font-medium'
+                        : isScrolledOrLight
+                          ? 'text-slate-600 hover:text-slate-900 font-normal'
+                          : 'text-white/80 hover:text-white font-normal'
                     }`}
-                    onClick={() =>
-                      activeMenu === item.menuId ? closeMenu() : openMenu(item.menuId)
-                    }
                   >
                     {item.label}
-                    <Icon
-                      name="ChevronDownIcon"
-                      size={14}
-                      className={`ml-1 shrink-0 transition-transform duration-200 ${
-                        isMenuOpen ? 'rotate-180 text-primary' : 'text-muted-foreground'
-                      }`}
-                      strokeWidth={2.5}
-                    />
-                  </button>
+                  </Link>
+                  {isCurrent && (
+                    <span className="absolute bottom-1 w-full h-[2.5px] bg-[#F95A1E] rounded-full" />
+                  )}
                 </div>
               );
             })}
           </nav>
 
           {/* Right: Actions */}
-          <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+          <div className="flex items-center gap-4 shrink-0">
             {/* Direct Book Demo CTA */}
             <Link
               href="/contact"
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary/90 transition-all shadow-sm hover:shadow-md hover:shadow-primary/20"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#F95A1E] hover:bg-[#e04e17] text-white text-sm font-medium transition-all shadow-md shadow-orange-500/20 group"
             >
-              <span>Book Demo</span>
-              <Icon name="ArrowRightIcon" size={12} />
+              <span>Book a Demo</span>
+              <span className="transition-transform group-hover:translate-x-0.5">→</span>
             </Link>
 
             {/* Mobile Menu Toggle Button */}
             <button
-              className="lg:hidden p-2 -mr-1 rounded-xl hover:bg-secondary transition-colors text-foreground"
+              className={`lg:hidden p-2 rounded-xl transition-colors ${
+                isScrolledOrLight
+                  ? 'text-slate-900 hover:bg-slate-100'
+                  : 'text-white hover:bg-white/10'
+              }`}
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             >
-              <Icon name={mobileOpen ? 'XMarkIcon' : 'Bars3Icon'} size={22} />
+              <Icon name={mobileOpen ? 'XMarkIcon' : 'Bars3Icon'} size={24} />
             </button>
           </div>
         </div>
@@ -615,39 +621,20 @@ export default function Header() {
         style={{ paddingTop: '72px' }}
       >
         <div className="flex-1 overflow-y-auto px-6 pb-20 space-y-4">
-          {/* Quick Sandbox Links in Mobile */}
+          {/* Book Personalized Demo Promo in Mobile */}
           <div className="p-4 rounded-2xl bg-orange-50/60 border border-orange-200/60">
-            <div className="text-xs font-bold text-orange-950 mb-2">Live Demo Sandboxes</div>
-            <div className="grid grid-cols-2 xs:grid-cols-4 gap-2">
-              <Link
-                href="/demo/admin"
-                onClick={() => setMobileOpen(false)}
-                className="p-2 bg-white rounded-xl border border-orange-200 text-center text-[11px] font-bold text-foreground hover:bg-orange-100"
-              >
-                PMS Admin
-              </Link>
-              <Link
-                href="/demo/guest"
-                onClick={() => setMobileOpen(false)}
-                className="p-2 bg-white rounded-xl border border-orange-200 text-center text-[11px] font-bold text-foreground hover:bg-orange-100"
-              >
-                Guest Mobile
-              </Link>
-              <Link
-                href="/demo/kitchen"
-                onClick={() => setMobileOpen(false)}
-                className="p-2 bg-white rounded-xl border border-orange-200 text-center text-[11px] font-bold text-foreground hover:bg-orange-100"
-              >
-                Kitchen KDS
-              </Link>
-              <Link
-                href="/demo/crm"
-                onClick={() => setMobileOpen(false)}
-                className="p-2 bg-white rounded-xl border border-orange-200 text-center text-[11px] font-bold text-foreground hover:bg-orange-100 col-span-2 xs:col-span-1"
-              >
-                Guest CRM
-              </Link>
-            </div>
+            <div className="text-xs font-bold text-orange-950 mb-1">Book a Personalized Demo</div>
+            <p className="text-[11px] text-orange-900/80 mb-3">
+              See Ownstay handle real hotel guest conversations in a custom-tailored 1-on-1
+              walkthrough.
+            </p>
+            <Link
+              href="/contact"
+              onClick={() => setMobileOpen(false)}
+              className="block w-full py-2 bg-primary hover:bg-primary/90 text-white text-center text-xs font-bold rounded-xl shadow-sm transition-all"
+            >
+              Schedule Consultation →
+            </Link>
           </div>
 
           <MobileAccordion label="Product">

@@ -205,7 +205,7 @@ const moduleData: Record<string, ModuleData> = {
       'Meet your guests on their favorite messaging channels with 98% open rates and zero app downloads required.',
     icon: 'DevicePhoneMobileIcon',
     simType: 'chat',
-    sandboxHref: '/demo/crm',
+    sandboxHref: '/contact',
     stat: { value: '98%', label: 'Message Read Rate via WhatsApp & SMS' },
     benefits: [
       {
@@ -258,7 +258,7 @@ const moduleData: Record<string, ModuleData> = {
       'A personal digital concierge in the pocket of every in-house guest, available 24/7 without delays.',
     icon: 'KeyIcon',
     simType: 'chat',
-    sandboxHref: '/demo/guest',
+    sandboxHref: '/contact',
     stat: { value: '4.9 / 5', label: 'Average In-Stay Guest Satisfaction' },
     benefits: [
       {
@@ -466,7 +466,7 @@ const moduleData: Record<string, ModuleData> = {
       'Digitize kitchen ticket pacing and room service orders. Connect guest WhatsApp chats directly to kitchen prep screens.',
     icon: 'FireIcon',
     simType: 'kitchen',
-    sandboxHref: '/demo/kitchen',
+    sandboxHref: '/contact',
     stat: { value: '18 min', label: 'Average Room Service Delivery Time' },
     benefits: [
       {
@@ -1081,11 +1081,11 @@ export default async function ModulePage({ params }: { params: Promise<{ module:
                   <Icon name="ArrowRightIcon" size={18} />
                 </Link>
                 <Link
-                  href={data.sandboxHref || '/demo'}
+                  href="/contact"
                   className="inline-flex items-center gap-2 bg-secondary text-foreground font-semibold px-6 py-3.5 rounded-xl hover:bg-slate-200 transition-all border border-border text-base"
                 >
-                  <Icon name="PlayIcon" size={18} />
-                  Live Interactive Sandbox
+                  <Icon name="CalendarDaysIcon" size={18} />
+                  Book Live Guided Demo
                 </Link>
               </div>
             </div>
@@ -1453,10 +1453,10 @@ export default async function ModulePage({ params }: { params: Promise<{ module:
               <Icon name="ArrowRightIcon" size={20} />
             </Link>
             <Link
-              href="/demo"
+              href="/contact"
               className="inline-flex items-center gap-2 bg-slate-800 text-slate-200 font-semibold text-lg px-7 py-4 rounded-xl hover:bg-slate-700 transition-all border border-slate-700"
             >
-              Launch Live Sandbox
+              Book Guided Demo
             </Link>
           </div>
         </div>

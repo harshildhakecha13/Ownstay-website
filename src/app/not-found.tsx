@@ -25,11 +25,11 @@ export default function NotFound() {
             Back to Home
           </Link>
           <Link
-            href="/demo"
+            href="/contact"
             className="inline-flex items-center justify-center gap-2 border border-border bg-background text-foreground px-6 py-3 rounded-lg font-medium hover:bg-accent hover:text-accent-foreground transition-colors duration-200"
           >
-            <Icon name="PlayIcon" size={16} />
-            Try Live Demo
+            <Icon name="CalendarDaysIcon" size={16} />
+            Request Demo
           </Link>
         </div>
       </div>

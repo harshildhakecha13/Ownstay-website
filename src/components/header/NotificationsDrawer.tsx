@@ -23,8 +23,8 @@ const INITIAL_NOTIFICATIONS: NotificationItem[] = [
       'AI approved 1:00 PM late checkout based on occupancy policies and updated Opera PMS folio.',
     time: '2 mins ago',
     unread: true,
-    link: '/demo/admin',
-    actionText: 'View Admin Suite',
+    link: '/contact',
+    actionText: 'Request Walkthrough',
   },
   {
     id: '2',
@@ -44,8 +44,8 @@ const INITIAL_NOTIFICATIONS: NotificationItem[] = [
     message: 'Executive Suite 501 assigned. Welcome amenity pack dispatched to Housekeeping queue.',
     time: '45 mins ago',
     unread: false,
-    link: '/demo/guest',
-    actionText: 'Check Guest Profile',
+    link: '/contact',
+    actionText: 'Request Walkthrough',
   },
   {
     id: '4',
@@ -54,8 +54,8 @@ const INITIAL_NOTIFICATIONS: NotificationItem[] = [
     message: 'Club Sandwich & Sparkling Water delivered to Room 314 in 6m 40s (Target: <15m).',
     time: '1 hour ago',
     unread: false,
-    link: '/demo/kitchen',
-    actionText: 'Open Kitchen KDS',
+    link: '/contact',
+    actionText: 'Request Walkthrough',
   },
   {
     id: '5',
@@ -205,11 +205,11 @@ export default function NotificationsDrawer({ isOpen, onClose }: NotificationsDr
         {/* Footer */}
         <div className="p-3 border-t border-border bg-slate-50 flex items-center justify-between text-xs">
           <Link
-            href="/demo"
+            href="/contact"
             onClick={onClose}
             className="font-semibold text-primary hover:underline"
           >
-            Launch Live Interactive Demos →
+            Book a Personalized Demo →
           </Link>
           {notifications.length > 0 && (
             <button

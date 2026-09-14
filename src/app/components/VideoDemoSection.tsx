@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import adImageNight from '@/assets/images/ai_hotel_ad_night_concierge_1788850184634.jpg';
 import adImageMultilingual from '@/assets/images/ai_hotel_ad_multilingual_1788850208932.jpg';
@@ -65,7 +66,8 @@ const CREATIVE_ADS = [
     id: 'ad-3',
     badge: '💰 Revenue Surge Spot',
     title: 'Automated RevPAR & Upsells',
-    subtitle: 'Autonomous AI offers spa upgrades, early check-in, & dinner reservations automatically.',
+    subtitle:
+      'Autonomous AI offers spa upgrades, early check-in, & dinner reservations automatically.',
     metric: '+42% Direct Upsell RevPAR',
     duration: '0:60',
     image: adImageUpsell,
@@ -142,7 +144,8 @@ export default function VideoDemoSection() {
             See Ownstay Win Hotel Guests in <span className="text-[#FF6B35]">Under 60 Seconds</span>
           </h2>
           <p className="text-slate-400 text-base max-w-2xl mx-auto leading-relaxed">
-            High-converting 60-second AI video commercials demonstrating real-time guest communication, multilingual translation, and direct revenue upsells.
+            High-converting 60-second AI video commercials demonstrating real-time guest
+            communication, multilingual translation, and direct revenue upsells.
           </p>
         </div>
 
@@ -364,15 +367,14 @@ export default function VideoDemoSection() {
               />
             </svg>
           </a>
-          <a
-            href="/demo"
+          <Link
+            href="/product/ownstay-platform"
             className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 text-white font-bold text-sm px-6 py-3.5 rounded-2xl border border-white/20 transition-all backdrop-blur-md"
           >
-            <span>🎮 Try Interactive Live Sandbox</span>
-          </a>
+            <span>Explore Product Platform →</span>
+          </Link>
         </div>
       </div>
     </section>
   );
 }
-

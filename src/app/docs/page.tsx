@@ -221,7 +221,7 @@ const GUIDES = [
     description:
       'Mount tablet displays in kitchen and bar stations for instant ticket fulfillment.',
     steps: [
-      '1. Open /demo/kitchen or your custom property station URL on tablet browsers.',
+      '1. Open your custom property station URL on tablet browsers.',
       '2. Assign stations (Hot Line, Cold Prep, Pastry, Cocktail Bar).',
       '3. Food orders placed via guest WhatsApp or QR portal will flash in real-time.',
       '4. Staff tap "Complete" to automatically notify guests that their order is on the way.',
@@ -377,10 +377,10 @@ export default function DocumentationPage() {
                   </p>
                 </div>
                 <Link
-                  href="/demo"
+                  href="/contact"
                   className="hidden sm:inline-flex items-center gap-1 text-xs font-bold text-primary hover:underline"
                 >
-                  Test in interactive sandbox →
+                  Book a guided walkthrough →
                 </Link>
               </div>
 

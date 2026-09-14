@@ -998,11 +998,11 @@ export default async function SolutionDetailPage({
                   <Icon name="ArrowRightIcon" size={18} />
                 </Link>
                 <Link
-                  href="/demo"
+                  href="/product/ownstay-platform"
                   className="inline-flex items-center gap-2 bg-secondary text-foreground font-semibold px-6 py-3.5 rounded-xl hover:bg-slate-200 transition-all border border-border"
                 >
-                  <Icon name="PlayIcon" size={18} />
-                  Test Live Simulator
+                  <Icon name="DocumentTextIcon" size={18} />
+                  Explore Product Platform
                 </Link>
               </div>
 
@@ -1130,10 +1130,10 @@ export default async function SolutionDetailPage({
               </h2>
             </div>
             <Link
-              href="/demo"
+              href="/product/ownstay-platform"
               className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-orange-700 transition-colors"
             >
-              Experience in Sandbox Simulator →
+              Explore Product Platform →
             </Link>
           </div>
 
@@ -1321,10 +1321,10 @@ export default async function SolutionDetailPage({
               <Icon name="ArrowRightIcon" size={20} />
             </Link>
             <Link
-              href="/demo"
+              href="/contact"
               className="inline-flex items-center gap-2 bg-slate-800 text-slate-200 font-semibold px-7 py-4 rounded-xl hover:bg-slate-700 transition-all border border-slate-700 text-lg"
             >
-              Launch Live Sandbox
+              Book Guided Demo
             </Link>
           </div>
         </div>

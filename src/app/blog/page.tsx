@@ -525,17 +525,15 @@ export default function BlogPage() {
             <div className="mt-10 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-xs text-muted-foreground">
                 Want to see this in your hotel?{' '}
-                <span className="text-foreground font-semibold">
-                  Test the live interactive demo.
-                </span>
+                <span className="text-foreground font-semibold">Schedule a personalized demo.</span>
               </div>
               <div className="flex items-center gap-3 w-full sm:w-auto">
                 <Link
-                  href="/demo"
+                  href="/contact"
                   onClick={() => setActivePost(null)}
                   className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary/90 text-center transition-colors shadow-sm"
                 >
-                  Launch Live Demo
+                  Schedule Demo
                 </Link>
                 <button
                   onClick={() => setActivePost(null)}

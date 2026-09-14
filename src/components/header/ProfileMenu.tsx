@@ -35,37 +35,6 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
           </div>
         </div>
 
-        {/* Live Interactive Demos Section */}
-        <div className="p-2 border-b border-border">
-          <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
-            Launch Sandbox Suites
-          </div>
-          <Link
-            href="/demo/admin"
-            onClick={onClose}
-            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-semibold text-foreground hover:bg-slate-100 hover:text-primary transition-colors"
-          >
-            <Icon name="ComputerDesktopIcon" size={16} className="text-primary" />
-            <span>Admin Operations Suite</span>
-          </Link>
-          <Link
-            href="/demo/kitchen"
-            onClick={onClose}
-            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-semibold text-foreground hover:bg-slate-100 hover:text-emerald-600 transition-colors"
-          >
-            <Icon name="FireIcon" size={16} className="text-emerald-600" />
-            <span>Kitchen KDS Station</span>
-          </Link>
-          <Link
-            href="/demo/guest"
-            onClick={onClose}
-            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-semibold text-foreground hover:bg-slate-100 hover:text-indigo-600 transition-colors"
-          >
-            <Icon name="DevicePhoneMobileIcon" size={16} className="text-indigo-600" />
-            <span>Guest Concierge Portal</span>
-          </Link>
-        </div>
-
         {/* Quick Links */}
         <div className="p-2">
           <Link

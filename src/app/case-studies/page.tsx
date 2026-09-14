@@ -407,11 +407,11 @@ export default function CaseStudiesPage() {
 
             <div className="mt-8 pt-6 border-t border-border flex items-center justify-between">
               <Link
-                href="/demo"
+                href="/contact"
                 onClick={() => setActiveCase(null)}
                 className="px-5 py-2.5 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary/90 transition-colors"
               >
-                Try Interactive Sandbox Demo
+                Schedule Guided Walkthrough
               </Link>
               <button
                 onClick={() => setActiveCase(null)}

@@ -17,8 +17,7 @@ export const navigationConfig = {
       {
         title: 'Ownstay Hotel Platform',
         badge: 'Core PMS',
-        description:
-          'Unified cloud platform for rooms, folios, housekeeping & front desk.',
+        description: 'Unified cloud platform for rooms, folios, housekeeping & front desk.',
         visual: 'platform',
         imageSrc: '/images/navigator_platform_3d_1788356165964.jpg',
         href: '/product/ownstay-platform',
@@ -26,8 +25,7 @@ export const navigationConfig = {
       {
         title: 'Ownstay AI Concierge',
         badge: 'AI Autopilot',
-        description:
-          'Autonomous voice & WhatsApp guest assistant in 40+ languages.',
+        description: 'Autonomous voice & WhatsApp guest assistant in 40+ languages.',
         visual: 'ai',
         imageSrc: '/images/navigator_ai_concierge_3d_1788356177876.jpg',
         href: '/product/ownstay-ai-receptionist',
