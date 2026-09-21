@@ -4,99 +4,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import AppLogo from '@/components/ui/AppLogo';
 import Icon from '@/components/ui/AppIcon';
+import SocialLinks from '@/components/ui/SocialLinks';
 import { navigationConfig, NavigationItem } from './header/navigationData';
-
-// 3D Visual Cards for the Product Mega Menu
-function ProductVisual3D({ kind, imageSrc }: { kind: string; imageSrc: string }) {
-  return (
-    <div className="relative h-[140px] w-full overflow-hidden rounded-t-2xl bg-slate-900 group">
-      {/* 3D Render Image */}
-      <img
-        src={imageSrc}
-        alt={kind === 'platform' ? 'Ownstay 3D Hotel Platform' : 'Ownstay 3D AI Concierge'}
-        referrerPolicy="no-referrer"
-        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-      />
-
-      {/* Atmospheric Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent pointer-events-none" />
-      <div className="absolute inset-0 ring-1 ring-inset ring-white/15 rounded-t-2xl pointer-events-none" />
-
-      {/* Floating Badge */}
-      <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/80 backdrop-blur-md border border-white/20 text-[10px] font-bold text-white shadow-lg">
-        {kind === 'platform' ? (
-          <>
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>2-Way PMS Engine</span>
-          </>
-        ) : (
-          <>
-            <span className="text-primary">✦</span>
-            <span>40+ Languages AI</span>
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
-
-// 3D Spotlight Card for Solutions and Resources Menus
-function MenuSpotlightCard({
-  title,
-  subtitle,
-  description,
-  imageSrc,
-  href,
-  ctaText,
-  onClick,
-}: {
-  title: string;
-  subtitle: string;
-  description: string;
-  imageSrc: string;
-  href: string;
-  ctaText: string;
-  onClick?: () => void;
-}) {
-  return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className="group flex flex-col h-full bg-gradient-to-b from-slate-50 to-orange-50/40 rounded-2xl border border-border/80 p-4 hover:border-primary/50 hover:shadow-lg transition-all duration-300 overflow-hidden justify-between"
-    >
-      <div>
-        <div className="relative h-[140px] w-full rounded-xl overflow-hidden mb-4 bg-slate-900 shadow-sm">
-          <img
-            src={imageSrc}
-            alt={title}
-            referrerPolicy="no-referrer"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
-          <div className="absolute bottom-2.5 left-3 right-3">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-primary-foreground bg-primary/90 px-2 py-0.5 rounded-md">
-              {subtitle}
-            </span>
-          </div>
-        </div>
-
-        <h4 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1 mb-1">
-          {title}
-        </h4>
-        <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">{description}</p>
-      </div>
-
-      <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-xs font-bold text-primary">
-        <span>{ctaText}</span>
-        <Icon
-          name="ArrowRightIcon"
-          size={14}
-          className="group-hover:translate-x-1 transition-transform"
-        />
-      </div>
-    </Link>
-  );
-}
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -111,7 +20,8 @@ export default function Header() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 30);
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -147,9 +57,8 @@ export default function Header() {
 
   const navItems = [
     { label: 'Home', href: '/', isActive: true },
-    { label: 'Features', href: '#features' },
+    { label: 'Product', href: '/product', menuId: 'product', hasDropdown: true },
     { label: 'Solutions', href: '/solutions', menuId: 'solutions', hasDropdown: true },
-    { label: 'Pricing', href: '/contact' },
     { label: 'About', href: '/about' },
   ];
 
@@ -260,7 +169,10 @@ export default function Header() {
           </div>
 
           {/* Center: Desktop Navigation Bar */}
-          <nav className="hidden lg:flex items-center gap-10 h-full" aria-label="Main navigation">
+          <nav
+            className="hidden lg:flex items-center gap-10 h-full absolute left-1/2 -translate-x-1/2"
+            aria-label="Main navigation"
+          >
             {navItems.map((item) => {
               const isCurrent =
                 item.href === '/'
@@ -299,14 +211,22 @@ export default function Header() {
 
           {/* Right: Actions */}
           <div className="flex items-center gap-4 shrink-0">
-            {/* Direct Book Demo CTA */}
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#F95A1E] hover:bg-[#e04e17] text-white text-sm font-medium transition-all shadow-md shadow-orange-500/20 group"
+            {/* Direct Book Demo CTA - hidden on initial hero view to avoid duplicate with hero CTA, smoothly appears on scroll */}
+            <div
+              className={`transition-all duration-300 ease-out overflow-hidden flex items-center ${
+                isDarkHero && !scrolled
+                  ? 'max-w-0 opacity-0 pointer-events-none scale-95 translate-x-2'
+                  : 'max-w-[200px] opacity-100 pointer-events-auto scale-100 translate-x-0'
+              }`}
             >
-              <span>Book a Demo</span>
-              <span className="transition-transform group-hover:translate-x-0.5">→</span>
-            </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#F95A1E] hover:bg-[#e04e17] text-white text-sm font-medium shadow-md shadow-orange-500/20 group whitespace-nowrap"
+              >
+                <span>Book a Demo</span>
+                <span className="transition-transform group-hover:translate-x-0.5">→</span>
+              </Link>
+            </div>
 
             {/* Mobile Menu Toggle Button */}
             <button
@@ -334,217 +254,56 @@ export default function Header() {
           {/* 1. PRODUCT MEGA MENU */}
           {activeMenu === 'product' && (
             <div
-              className="w-full max-w-[1240px] mx-auto bg-white border border-border rounded-3xl shadow-[0_30px_90px_rgba(20,20,30,0.14)] pointer-events-auto overflow-hidden animate-in fade-in-50 zoom-in-[0.98] duration-200"
+              className="w-full max-w-[820px] mx-auto bg-white border border-border/80 rounded-2xl shadow-[0_20px_70px_rgba(20,20,30,0.12)] pointer-events-auto overflow-hidden animate-in fade-in-50 zoom-in-[0.98] duration-200 p-6 grid grid-cols-2 gap-8"
               onMouseEnter={() => openMenu('product')}
               onMouseLeave={closeMenu}
             >
-              <div className="flex w-full">
-                {/* Left: 3D Featured Visual Cards */}
-                <div className="w-[36%] bg-slate-50/70 p-6 border-r border-border flex flex-col gap-4 justify-between">
-                  <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground flex items-center justify-between">
-                    <span>FEATURED PRODUCTS</span>
-                    <span className="text-[10px] font-normal text-primary lowercase">
-                      3d interactive suite
-                    </span>
+              {navigationConfig.product.sections.map((col) => (
+                <div key={col.title}>
+                  <div className="flex items-center justify-between mb-3 pb-2 border-b border-border/60">
+                    <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                      {col.title}
+                    </h3>
                   </div>
-
-                  {navigationConfig.product.featured.map((item) => (
-                    <Link
-                      key={item.title}
-                      href={item.href}
-                      onClick={() => setActiveMenu(null)}
-                      className="group block bg-white rounded-2xl border border-border shadow-sm hover:shadow-xl hover:border-primary/50 transition-all duration-300 overflow-hidden flex flex-col"
-                    >
-                      <ProductVisual3D kind={item.visual} imageSrc={item.imageSrc} />
-                      <div className="p-4 bg-white">
-                        <div className="text-sm font-bold text-foreground group-hover:text-primary transition-colors flex items-center justify-between">
-                          <span>{item.title}</span>
-                          <span className="text-[10px] font-semibold bg-orange-100 text-orange-800 px-2 py-0.5 rounded-full">
-                            {item.badge}
-                          </span>
-                        </div>
-                        <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed line-clamp-2">
-                          {item.description}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-
-                {/* Right: Operations, Teams & Intelligence Categories */}
-                <div className="w-[64%] p-7 grid grid-cols-3 gap-x-8 bg-white">
-                  {/* Column 1: Hotel Operations */}
-                  <div className="flex flex-col gap-7">
-                    <div>
-                      <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-3 pb-1.5 border-b border-border/60">
-                        {navigationConfig.product.categories.hotops.title}
-                      </h3>
-                      <div className="flex flex-col gap-1.5">
-                        {navigationConfig.product.categories.hotops.items.map((link) => (
-                          <NavigationRow
-                            key={link.label}
-                            item={link}
-                            onClick={() => setActiveMenu(null)}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Column 2: Hotel Teams */}
-                  <div className="flex flex-col gap-7">
-                    <div>
-                      <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-3 pb-1.5 border-b border-border/60">
-                        {navigationConfig.product.categories.teams.title}
-                      </h3>
-                      <div className="flex flex-col gap-1.5">
-                        {navigationConfig.product.categories.teams.items.map((link) => (
-                          <NavigationRow
-                            key={link.label}
-                            item={link}
-                            onClick={() => setActiveMenu(null)}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Column 3: Intelligence & Guest AI */}
-                  <div className="flex flex-col gap-7">
-                    <div>
-                      <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-3 pb-1.5 border-b border-border/60">
-                        {navigationConfig.product.categories.intelligence.title}
-                      </h3>
-                      <div className="flex flex-col gap-1.5">
-                        {navigationConfig.product.categories.intelligence.items.map((link) => (
-                          <NavigationRow
-                            key={link.label}
-                            item={link}
-                            onClick={() => setActiveMenu(null)}
-                          />
-                        ))}
-                      </div>
-                    </div>
+                  <div className="flex flex-col gap-1.5">
+                    {col.items.map((link) => (
+                      <NavigationRow
+                        key={link.label}
+                        item={link}
+                        onClick={() => setActiveMenu(null)}
+                      />
+                    ))}
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           )}
 
           {/* 2. SOLUTIONS MEGA MENU */}
           {activeMenu === 'solutions' && (
             <div
-              className="w-full max-w-[1200px] mx-auto bg-white border border-border rounded-3xl shadow-[0_30px_90px_rgba(20,20,30,0.14)] pointer-events-auto overflow-hidden animate-in fade-in-50 zoom-in-[0.98] duration-200"
+              className="w-full max-w-[820px] mx-auto bg-white border border-border/80 rounded-2xl shadow-[0_20px_70px_rgba(20,20,30,0.12)] pointer-events-auto overflow-hidden animate-in fade-in-50 zoom-in-[0.98] duration-200 p-6 grid grid-cols-2 gap-8"
               onMouseEnter={() => openMenu('solutions')}
               onMouseLeave={closeMenu}
             >
-              <div className="flex w-full p-7 gap-8">
-                {/* Left 3D Spotlight Card */}
-                <div className="w-[30%] shrink-0">
-                  <MenuSpotlightCard
-                    title={navigationConfig.solutions.spotlight.title}
-                    subtitle={navigationConfig.solutions.spotlight.subtitle}
-                    description={navigationConfig.solutions.spotlight.description}
-                    imageSrc={navigationConfig.solutions.spotlight.imageSrc}
-                    href={navigationConfig.solutions.spotlight.href}
-                    ctaText={navigationConfig.solutions.spotlight.ctaText}
-                    onClick={() => setActiveMenu(null)}
-                  />
+              {navigationConfig.solutions.sections.map((col) => (
+                <div key={col.title}>
+                  <div className="flex items-center justify-between mb-3 pb-2 border-b border-border/60">
+                    <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                      {col.title}
+                    </h3>
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    {col.items.map((link) => (
+                      <NavigationRow
+                        key={link.label}
+                        item={link}
+                        onClick={() => setActiveMenu(null)}
+                      />
+                    ))}
+                  </div>
                 </div>
-
-                {/* Right 3 Categorized Columns */}
-                <div className="w-[70%] grid grid-cols-3 gap-6">
-                  {navigationConfig.solutions.sections.map((col) => (
-                    <div key={col.title}>
-                      <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-4 pb-1.5 border-b border-border/60">
-                        {col.title}
-                      </h3>
-                      <div className="flex flex-col gap-2">
-                        {col.items.map((link) => (
-                          <NavigationRow
-                            key={link.label}
-                            item={link}
-                            onClick={() => setActiveMenu(null)}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Bottom Quick Bar */}
-              <div className="px-6 py-3 bg-slate-50 border-t border-border flex items-center justify-between text-xs">
-                <span className="text-muted-foreground">
-                  Serving luxury boutiques, resort destinations, and multi-property management
-                  groups worldwide.
-                </span>
-                <Link
-                  href="/case-studies"
-                  onClick={() => setActiveMenu(null)}
-                  className="font-bold text-primary hover:underline flex items-center gap-1"
-                >
-                  Calculate Hotel Labor & RevPAR ROI →
-                </Link>
-              </div>
-            </div>
-          )}
-
-          {/* 3. RESOURCES MEGA MENU */}
-          {activeMenu === 'resources' && (
-            <div
-              className="w-full max-w-[1200px] mx-auto bg-white border border-border rounded-3xl shadow-[0_30px_90px_rgba(20,20,30,0.14)] pointer-events-auto overflow-hidden animate-in fade-in-50 zoom-in-[0.98] duration-200"
-              onMouseEnter={() => openMenu('resources')}
-              onMouseLeave={closeMenu}
-            >
-              <div className="flex w-full p-7 gap-8">
-                {/* Left 3D Spotlight Card */}
-                <div className="w-[30%] shrink-0">
-                  <MenuSpotlightCard
-                    title={navigationConfig.resources.spotlight.title}
-                    subtitle={navigationConfig.resources.spotlight.subtitle}
-                    description={navigationConfig.resources.spotlight.description}
-                    imageSrc={navigationConfig.resources.spotlight.imageSrc}
-                    href={navigationConfig.resources.spotlight.href}
-                    ctaText={navigationConfig.resources.spotlight.ctaText}
-                    onClick={() => setActiveMenu(null)}
-                  />
-                </div>
-
-                {/* Right 3 Categorized Columns */}
-                <div className="w-[70%] grid grid-cols-3 gap-6">
-                  {navigationConfig.resources.sections.map((col) => (
-                    <div key={col.title}>
-                      <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-4 pb-1.5 border-b border-border/60">
-                        {col.title}
-                      </h3>
-                      <div className="flex flex-col gap-2">
-                        {col.items.map((link) => (
-                          <NavigationRow
-                            key={link.label}
-                            item={link}
-                            onClick={() => setActiveMenu(null)}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Bottom Quick Bar */}
-              <div className="px-6 py-3 bg-slate-50 border-t border-border flex items-center justify-between text-xs">
-                <span className="text-muted-foreground">
-                  Explore REST webhooks, Open API v2.4, and the 2026 Hospitality Automation Report.
-                </span>
-                <Link
-                  href="/docs"
-                  onClick={() => setActiveMenu(null)}
-                  className="font-bold text-primary hover:underline flex items-center gap-1"
-                >
-                  Test API Endpoints in Live Console →
-                </Link>
-              </div>
+              ))}
             </div>
           )}
         </div>
@@ -639,77 +398,25 @@ export default function Header() {
 
           <MobileAccordion label="Product">
             <div className="pl-3 py-2 flex flex-col gap-4 border-l-2 border-border ml-2">
-              <div>
-                <div className="text-[10px] font-bold text-primary uppercase tracking-wider mb-2">
-                  Featured 3D Modules
+              {navigationConfig.product.sections.map((col) => (
+                <div key={col.title}>
+                  <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2">
+                    {col.title}
+                  </div>
+                  <div className="space-y-1.5">
+                    {col.items.map((f) => (
+                      <Link
+                        key={f.label}
+                        href={f.href}
+                        onClick={() => setMobileOpen(false)}
+                        className="block py-1 text-xs font-semibold text-foreground hover:text-primary transition-colors"
+                      >
+                        {f.label}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  {navigationConfig.product.featured.map((f) => (
-                    <Link
-                      key={f.title}
-                      href={f.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="block p-2 rounded-lg bg-slate-50 text-xs font-bold text-foreground"
-                    >
-                      {f.title}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2">
-                  {navigationConfig.product.categories.hotops.title}
-                </div>
-                <div className="space-y-1">
-                  {navigationConfig.product.categories.hotops.items.map((f) => (
-                    <Link
-                      key={f.label}
-                      href={f.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="block py-1 text-xs font-semibold text-foreground hover:text-primary"
-                    >
-                      {f.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2">
-                  {navigationConfig.product.categories.teams.title}
-                </div>
-                <div className="space-y-1">
-                  {navigationConfig.product.categories.teams.items.map((f) => (
-                    <Link
-                      key={f.label}
-                      href={f.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="block py-1 text-xs font-semibold text-foreground hover:text-primary"
-                    >
-                      {f.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2">
-                  {navigationConfig.product.categories.intelligence.title}
-                </div>
-                <div className="space-y-1">
-                  {navigationConfig.product.categories.intelligence.items.map((f) => (
-                    <Link
-                      key={f.label}
-                      href={f.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="block py-1 text-xs font-semibold text-foreground hover:text-primary"
-                    >
-                      {f.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
           </MobileAccordion>
 
@@ -717,48 +424,36 @@ export default function Header() {
             <div className="pl-3 py-2 flex flex-col gap-4 border-l-2 border-border ml-2">
               {navigationConfig.solutions.sections.map((col) => (
                 <div key={col.title}>
-                  <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-1">
+                  <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2">
                     {col.title}
                   </div>
-                  {col.items.map((f) => (
-                    <Link
-                      key={f.label}
-                      href={f.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="block py-1 text-xs font-semibold text-foreground hover:text-primary"
-                    >
-                      {f.label}
-                    </Link>
-                  ))}
+                  <div className="space-y-1.5">
+                    {col.items.map((f) => (
+                      <Link
+                        key={f.label}
+                        href={f.href}
+                        onClick={() => setMobileOpen(false)}
+                        className="block py-1 text-xs font-semibold text-foreground hover:text-primary transition-colors"
+                      >
+                        {f.label}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
           </MobileAccordion>
 
-          <MobileAccordion label="Resources">
-            <div className="pl-3 py-2 flex flex-col gap-4 border-l-2 border-border ml-2">
-              {navigationConfig.resources.sections.map((col) => (
-                <div key={col.title}>
-                  <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-1">
-                    {col.title}
-                  </div>
-                  {col.items.map((f) => (
-                    <Link
-                      key={f.label}
-                      href={f.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="block py-1 text-xs font-semibold text-foreground hover:text-primary"
-                    >
-                      {f.label}
-                    </Link>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </MobileAccordion>
+          <Link
+            href="/about"
+            onClick={() => setMobileOpen(false)}
+            className="block py-2.5 px-3 rounded-xl text-xs font-bold text-foreground hover:bg-slate-50 transition-colors"
+          >
+            About Us
+          </Link>
         </div>
 
-        <div className="p-4 border-t border-border bg-slate-50 flex flex-col gap-2">
+        <div className="p-4 border-t border-border bg-slate-50 flex flex-col gap-3">
           <Link
             href="/contact"
             onClick={() => setMobileOpen(false)}
@@ -766,6 +461,9 @@ export default function Header() {
           >
             Book 20-Min Live Demo
           </Link>
+          <div className="flex items-center justify-center gap-3 pt-1">
+            <SocialLinks itemClassName="w-8 h-8 rounded-lg bg-white border border-slate-200 hover:bg-[#F95A1E] hover:text-white flex items-center justify-center text-slate-500 transition-colors shadow-xs" />
+          </div>
         </div>
       </div>
     </>
@@ -778,27 +476,27 @@ function NavigationRow({ item, onClick }: { item: NavigationItem; onClick?: () =
     <Link
       href={item.href}
       onClick={onClick}
-      className="group flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-100/80 transition-all duration-150"
+      className="group flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-all duration-150"
     >
       {item.icon && (
-        <div className="w-7 h-7 rounded-lg bg-slate-100 text-slate-600 group-hover:bg-primary/10 group-hover:text-primary flex items-center justify-center shrink-0 mt-0.5 transition-colors">
-          <Icon name={item.icon} size={15} />
+        <div className="w-8 h-8 rounded-lg bg-orange-500/10 text-[#F95A1E] group-hover:bg-[#F95A1E] group-hover:text-white flex items-center justify-center shrink-0 mt-0.5 transition-colors">
+          <Icon name={item.icon} size={16} />
         </div>
       )}
       <div className="flex-1 min-w-0">
-        <span className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors block truncate">
+        <span className="text-xs font-bold text-foreground group-hover:text-[#F95A1E] transition-colors block leading-tight">
           {item.label}
         </span>
         {item.description && (
-          <p className="text-[11px] text-muted-foreground/80 font-normal leading-tight truncate mt-0.5">
+          <p className="text-[11px] text-muted-foreground font-normal leading-snug mt-0.5">
             {item.description}
           </p>
         )}
       </div>
       <Icon
         name="ChevronRightIcon"
-        size={12}
-        className="text-muted-foreground/30 group-hover:text-primary group-hover:translate-x-0.5 transition-all opacity-0 group-hover:opacity-100 shrink-0 mt-1"
+        size={13}
+        className="text-muted-foreground/30 group-hover:text-[#F95A1E] group-hover:translate-x-0.5 transition-all opacity-0 group-hover:opacity-100 shrink-0 mt-1"
       />
     </Link>
   );

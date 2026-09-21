@@ -117,13 +117,6 @@ const SEARCH_ITEMS: SearchResult[] = [
     icon: 'UserGroupIcon',
   },
   {
-    title: 'Careers at Ownstay',
-    category: 'Company',
-    description: 'Join our team building the future of hotel technology.',
-    href: '/careers',
-    icon: 'BriefcaseIcon',
-  },
-  {
     title: 'Book a Personalized Demo',
     category: 'Get Started',
     description: 'Schedule a tailored walkthrough with a hospitality AI specialist.',

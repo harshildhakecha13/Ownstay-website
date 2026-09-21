@@ -17,15 +17,16 @@ const hotelTypes: HotelType[] = [
     title: 'Boutique Hotels',
     description:
       'Give guests personalized assistance without increasing front-desk workload. Maintain your unique voice at scale.',
-    image: 'https://images.unsplash.com/photo-1542314831-c6a4d142104d',
-    imageAlt: 'Elegant boutique hotel lobby',
+    image: '/assets/images/boutique_hotel.jpg',
+    imageAlt: 'Luxury boutique hotel lounge and reception',
   },
   {
     icon: 'BuildingOffice2Icon',
     title: 'Hotel Groups & Chains',
     description:
       'Deploy consistent, on-brand guest communication across every property in your portfolio.',
-    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945',
+    image:
+      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Premium hotel group lobby',
   },
   {
@@ -33,7 +34,8 @@ const hotelTypes: HotelType[] = [
     title: 'Independent Hotels',
     description:
       'Automate repetitive guest communication so your smaller team can focus on what truly matters.',
-    image: 'https://images.unsplash.com/photo-1517840901100-8179e982acb7',
+    image:
+      'https://images.unsplash.com/photo-1517840901100-8179e982acb7?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Modern independent hotel exterior',
   },
   {
@@ -41,7 +43,8 @@ const hotelTypes: HotelType[] = [
     title: 'Resorts & Extended Stays',
     description:
       'Handle high volumes of guest questions and requests during peak season without adding headcount.',
-    image: 'https://images.unsplash.com/photo-1525713156986-c8e790e9cb98',
+    image:
+      'https://images.unsplash.com/photo-1525713156986-c8e790e9cb98?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Tropical resort pool',
   },
 ];

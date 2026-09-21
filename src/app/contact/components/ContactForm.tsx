@@ -124,7 +124,9 @@ export default function ContactForm() {
           </div>
           <div className="flex justify-between">
             <span className="text-muted-foreground">Lead Specialist:</span>
-            <span className="font-bold text-foreground">Arjun Mehta (Founding Team)</span>
+            <span className="font-bold text-foreground">
+              Harshil Dhankecha (Co-Founder &amp; COO)
+            </span>
           </div>
         </div>
 

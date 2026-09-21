@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import AppLogo from '@/components/ui/AppLogo';
-import Icon from '@/components/ui/AppIcon';
+import SocialLinks from '@/components/ui/SocialLinks';
 
 const footerLinks = {
   product: [
@@ -12,8 +12,8 @@ const footerLinks = {
   ],
   company: [
     { label: 'About', href: '/about' },
+    { label: 'Ownthum AI ↗', href: 'https://ownthum.com', external: true },
     { label: 'Contact', href: '/contact' },
-    { label: 'Careers', href: '/careers' },
   ],
   resources: [
     { label: 'Blog', href: '/blog' },
@@ -34,39 +34,67 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
           {/* Brand */}
           <div className="col-span-2 md:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center gap-2.5" aria-label="Ownstay home">
-              <AppLogo size={32} />
+            <Link href="/" className="flex items-center gap-3 group" aria-label="Ownstay home">
+              <AppLogo size={36} />
               <div className="flex flex-col">
-                <span className="font-bold text-base text-foreground tracking-tight leading-none">
+                <span className="font-extrabold text-lg text-foreground tracking-tight leading-none group-hover:text-orange-600 transition-colors">
                   Ownstay
                 </span>
-                <span className="text-[10px] text-muted-foreground tracking-widest uppercase leading-none mt-0.5">
+                <span className="text-[10px] font-bold text-orange-600 tracking-widest uppercase leading-none mt-1">
                   by Ownthum AI
                 </span>
               </div>
             </Link>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-[220px]">
-              AI receptionist for modern hotels.
+
+            <p className="text-xs text-muted-foreground leading-relaxed max-w-[260px]">
+              Autonomous AI receptionist & front-office operating system engineered for modern
+              boutique & luxury hotels.
             </p>
-            <div className="flex items-center gap-4">
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="text-muted-foreground hover:text-foreground transition-colors p-1"
+
+            {/* Help & Support Card */}
+            <a
+              href="mailto:help@ownstayai.com"
+              className="group flex items-center gap-3 p-2.5 rounded-2xl bg-slate-50 hover:bg-white border border-slate-200/80 hover:border-orange-300 shadow-2xs hover:shadow-md hover:shadow-orange-500/5 transition-all duration-200 max-w-[270px]"
+            >
+              <div className="w-8 h-8 rounded-xl bg-orange-500/10 text-orange-600 flex items-center justify-center shrink-0 group-hover:bg-[#F95A1E] group-hover:text-white transition-colors duration-200">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+              <div className="min-w-0 flex-1">
+                <span className="block text-[10px] font-bold uppercase tracking-wider text-muted-foreground group-hover:text-orange-600 transition-colors">
+                  Helpdesk & Inquiries
+                </span>
+                <span className="block text-xs font-bold text-foreground group-hover:text-orange-600 transition-colors truncate">
+                  help@ownstayai.com
+                </span>
+              </div>
+              <svg
+                className="w-3.5 h-3.5 text-muted-foreground/40 group-hover:text-orange-600 group-hover:translate-x-0.5 transition-all shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                <Icon name="GlobeAltIcon" size={18} />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="text-muted-foreground hover:text-foreground transition-colors p-1"
-              >
-                <Icon name="CameraIcon" size={18} />
-              </a>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2.5}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </a>
+
+            {/* Social Media */}
+            <div className="space-y-2 pt-1 max-w-[270px]">
+              <p className="text-[11px] font-bold tracking-wider uppercase text-muted-foreground">
+                Connect With Us
+              </p>
+              <SocialLinks variant="buttons" iconClassName="w-4 h-4" />
             </div>
           </div>
 
@@ -97,12 +125,23 @@ export default function Footer() {
             <ul className="space-y-3">
               {footerLinks?.company?.map((link) => (
                 <li key={link?.label}>
-                  <Link
-                    href={link?.href}
-                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link?.label}
-                  </Link>
+                  {link?.href.startsWith('http') ? (
+                    <a
+                      href={link?.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-medium text-orange-500 hover:text-orange-600 transition-colors inline-flex items-center gap-1"
+                    >
+                      {link?.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={link?.href}
+                      className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {link?.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

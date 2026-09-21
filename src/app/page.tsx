@@ -13,7 +13,6 @@ import MultilingualSection from '@/app/components/MultilingualSection';
 import AiHumanSection from '@/app/components/AiHumanSection';
 import TrustSection from '@/app/components/TrustSection';
 import MetricsSection from '@/app/components/MetricsSection';
-import VideoDemoSection from '@/app/components/VideoDemoSection';
 import TestimonialsSection from '@/app/components/TestimonialsSection';
 import FaqSection from '@/app/components/FaqSection';
 import FinalCtaSection from '@/app/components/FinalCtaSection';
@@ -35,7 +34,6 @@ export default function HomePage() {
       <MultilingualSection />
       <AiHumanSection />
       <TrustSection />
-      <VideoDemoSection />
       <TestimonialsSection />
       <FaqSection />
       <FinalCtaSection />

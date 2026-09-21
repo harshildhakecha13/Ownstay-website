@@ -24,14 +24,6 @@ export default function HeroSection() {
     };
   }, []);
 
-  const handleWatchVideo = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    const element = document.getElementById('video-demo');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <section
       className="relative min-h-screen flex flex-col justify-between pt-28 pb-6 overflow-hidden bg-slate-950 text-white"
@@ -85,22 +77,22 @@ export default function HeroSection() {
                 <span className="transition-transform group-hover:translate-x-0.5">→</span>
               </Link>
 
-              <button
-                onClick={handleWatchVideo}
-                className="inline-flex items-center gap-3.5 text-white hover:text-orange-400 transition-colors group cursor-pointer"
+              <Link
+                href="/product"
+                className="inline-flex items-center gap-3.5 text-white hover:text-orange-400 transition-colors group"
               >
-                <div className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center transition-all">
-                  <svg className="w-4 h-4 fill-white ml-0.5" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
+                <div className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center transition-all group-hover:border-orange-500/40">
+                  <Icon name="CubeIcon" size={20} className="text-[#F95A1E]" />
                 </div>
                 <div className="text-left">
                   <div className="text-sm font-medium text-white leading-tight">
-                    Watch how it works
+                    Explore Product
                   </div>
-                  <div className="text-xs text-slate-400 font-normal mt-0.5">(2 min)</div>
+                  <div className="text-xs text-slate-400 font-normal mt-0.5">
+                    Platform &amp; AI Suite
+                  </div>
                 </div>
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -199,12 +191,13 @@ export default function HeroSection() {
                         </div>
                       </div>
 
-                      <Link
-                        href="/contact"
-                        className="w-full py-2.5 rounded-full bg-[#F95A1E] hover:bg-[#e04e17] text-white font-medium text-xs text-center transition-all block shadow-sm shadow-orange-500/20"
+                      <div
+                        id="hero-mock-book-now-button"
+                        className="w-full py-2.5 rounded-full bg-[#F95A1E] text-white font-medium text-xs text-center select-none cursor-default shadow-sm shadow-orange-500/20"
+                        aria-hidden="true"
                       >
                         Book now →
-                      </Link>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>

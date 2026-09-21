@@ -30,7 +30,7 @@ const POSTS: BlogPost[] = [
     title: 'AI Receptionist vs. Human Front Desk: What Hotels Are Actually Choosing',
     excerpt:
       "The debate isn't AI vs. humans — it's about where each excels. We analyzed 500 hotels to find out how the best properties are blending both.",
-    author: { name: 'Arjun Mehta', role: 'Co-Founder & CEO', avatar: 'AM' },
+    author: { name: 'Ellis Zalavadiya', role: 'Co-Founder & CEO', avatar: 'EZ' },
     content: {
       introduction:
         'Over the past two years, hoteliers have faced unprecedented staffing constraints alongside soaring guest expectations for 24/7 instant gratification. Rather than replacing human warm welcomes, high-performing hotels are using conversational AI as an invisible shield that deflects repetitive tasks.',
@@ -162,7 +162,7 @@ const POSTS: BlogPost[] = [
     title: 'WhatsApp Is Now the #1 Guest Communication Channel. Is Your Hotel Ready?',
     excerpt:
       'Over 70% of hotel guests prefer messaging over calling. WhatsApp integration with Ownstay means every message gets an instant, intelligent reply.',
-    author: { name: 'Arjun Mehta', role: 'Co-Founder & CEO', avatar: 'AM' },
+    author: { name: 'Harshil Dhankecha', role: 'Co-Founder & COO', avatar: 'HD' },
     content: {
       introduction:
         'Guests no longer want to download custom hotel mobile apps that they will delete 3 days later. They want to communicate through the apps already on their home screens: WhatsApp, Apple Messages, and SMS.',

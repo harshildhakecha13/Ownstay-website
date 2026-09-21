@@ -13,139 +13,101 @@ export interface NavigationCategory {
 
 export const navigationConfig = {
   product: {
-    featured: [
+    spotlight: {
+      title: 'Ownstay AI Receptionist Suite',
+      subtitle: '24/7 Front Desk Co-Pilot',
+      badge: 'Core Platform',
+      description:
+        'Autonomous phone calls, WhatsApp concierge, and certified 2-way PMS dispatch across 40+ native languages.',
+      imageSrc: '/images/navigator_ai_concierge_3d_1788356177876.jpg',
+      href: '/product',
+      ctaText: 'Explore Platform Overview',
+      highlights: [
+        '90% routine call deflection without hold times',
+        '2-way sync with Opera, Cloudbeds, Mews & Guesty',
+        '40+ languages with natural conversational nuance',
+      ],
+    },
+    sections: [
       {
-        title: 'Ownstay Hotel Platform',
-        badge: 'Core PMS',
-        description: 'Unified cloud platform for rooms, folios, housekeeping & front desk.',
-        visual: 'platform',
-        imageSrc: '/images/navigator_platform_3d_1788356165964.jpg',
-        href: '/product/ownstay-platform',
-      },
-      {
-        title: 'Ownstay AI Concierge',
-        badge: 'AI Autopilot',
-        description: 'Autonomous voice & WhatsApp guest assistant in 40+ languages.',
-        visual: 'ai',
-        imageSrc: '/images/navigator_ai_concierge_3d_1788356177876.jpg',
-        href: '/product/ownstay-ai-receptionist',
-      },
-    ],
-    categories: {
-      hotops: {
-        title: 'HOTEL OPERATIONS',
+        title: 'AI GUEST RECEPTION',
         items: [
-          {
-            label: 'Reservations & Rates',
-            href: '/product/booking-assistance',
-            description: 'Direct booking engine, OTA sync & dynamic rates.',
-            icon: 'CalendarDaysIcon',
-          },
-          {
-            label: 'Guest Management (CRM)',
-            href: '/product/guest-messaging',
-            description: 'VIP guest profiles, stay history & preferences.',
-            icon: 'UsersIcon',
-          },
-          {
-            label: 'Rooms & Inventory',
-            href: '/product/in-stay-support',
-            description: 'Live room availability, keycard states & upgrades.',
-            icon: 'KeyIcon',
-          },
-          {
-            label: 'Housekeeping & Turndown',
-            href: '/product/guest-request-management',
-            description: 'Real-time cleaning dispatch & inspection queue.',
-            icon: 'SparklesIcon',
-          },
-          {
-            label: 'Facility Maintenance',
-            href: '/product/facility-maintenance',
-            description: 'Instant ticket triage, HVAC telemetry & repairs.',
-            icon: 'WrenchScrewdriverIcon',
-          },
-        ],
-      },
-      teams: {
-        title: 'HOTEL TEAMS',
-        items: [
-          {
-            label: 'Staff & Shift Scheduling',
-            href: '/product/staff-scheduling',
-            description: 'Role-based access & department attendance.',
-            icon: 'UserGroupIcon',
-          },
-          {
-            label: 'Guest Services & Chat',
-            href: '/product/conversation-management',
-            description: 'Omnichannel messaging on WhatsApp, SMS & web.',
-            icon: 'ChatBubbleBottomCenterTextIcon',
-          },
-          {
-            label: 'Kitchen & KDS Station',
-            href: '/product/kitchen-kds',
-            description: 'Live food ticket prep times & bar orders.',
-            icon: 'FireIcon',
-          },
-          {
-            label: 'Hotel Inventory & Assets',
-            href: '/product/hotel-inventory',
-            description: 'F&B stock tracking & supplier reorder alerts.',
-            icon: 'CubeIcon',
-          },
-        ],
-      },
-      intelligence: {
-        title: 'INTELLIGENCE & GUEST AI',
-        items: [
-          {
-            label: 'Analytics & Yield Reports',
-            href: '/product/yield-analytics',
-            description: 'RevPAR, ADR, occupancy & labor metrics.',
-            icon: 'ChartBarIcon',
-          },
-          {
-            label: 'AI Knowledge Base',
-            href: '/product/hotel-knowledge-ai',
-            description: 'Trained on menus, policies, amenities & FAQs.',
-            icon: 'BookOpenIcon',
-          },
-          {
-            label: 'Security & Audit Logs',
-            href: '/product/security-compliance',
-            description: 'SOC2 Type II compliant & PMS audit trail.',
-            icon: 'ShieldCheckIcon',
-          },
           {
             label: 'AI Voice Receptionist',
-            href: '/product/ai-voice-receptionist',
-            description: 'High-fidelity voice AI for guest phone calls.',
+            href: '/product/ownstay-ai-receptionist',
+            description: '24/7 phone inquiry handling, room bookings & late-night coverage.',
             icon: 'PhoneIcon',
           },
           {
-            label: 'Multilingual Guest AI',
-            href: '/product/multilingual-ai',
-            description: 'Fluent translation in 40+ native languages.',
-            icon: 'LanguageIcon',
+            label: 'Guest Chat & WhatsApp',
+            href: '/product/guest-messaging',
+            description: 'Omnichannel guest messaging across WhatsApp, SMS & web.',
+            icon: 'ChatBubbleBottomCenterTextIcon',
+          },
+          {
+            label: 'In-Stay Requests & Housekeeping',
+            href: '/product/guest-request-management',
+            description: 'Automated towel, maintenance & turndown service dispatch.',
+            icon: 'SparklesIcon',
+          },
+          {
+            label: 'Hospitality AI Knowledge Base',
+            href: '/product/hotel-knowledge-ai',
+            description: 'Trained on hotel menus, amenities, policies & checkout hours.',
+            icon: 'BookOpenIcon',
           },
         ],
       },
-    },
+      {
+        title: 'HOTEL OPERATIONS & PMS',
+        items: [
+          {
+            label: 'Unified Hotel Platform (PMS)',
+            href: '/product/ownstay-platform',
+            description: 'Certified 2-way sync with Opera Cloud, Cloudbeds, Mews & Guesty.',
+            icon: 'Squares2X2Icon',
+          },
+          {
+            label: 'Direct Reservations & Rates Engine',
+            href: '/product/booking-assistance',
+            description: 'Commission-free booking engine, dynamic yield pricing & OTA sync.',
+            icon: 'CalendarDaysIcon',
+          },
+          {
+            label: 'Kitchen KDS & Room Service',
+            href: '/product/kitchen-kds',
+            description: 'Instant food ticket dispatch straight from guest chat to kitchen.',
+            icon: 'FireIcon',
+          },
+          {
+            label: 'RevPAR & Yield Analytics',
+            href: '/product/yield-analytics',
+            description: 'Real-time occupancy yield, labor deflection & ADR reporting.',
+            icon: 'ChartBarIcon',
+          },
+        ],
+      },
+    ],
   },
   solutions: {
     spotlight: {
       title: 'Smart Property Ecosystem',
       subtitle: 'Engineered for Modern Hospitality',
+      badge: 'Tailored Solutions',
       description:
-        'From 20-room boutique retreats to 1,000+ key luxury resort chains, scale without expanding headcount.',
+        'From boutique retreats to 1,000+ key luxury resort chains, scale guest services without expanding hotel headcount.',
       imageSrc: '/images/navigator_resort_3d_1788356199214.jpg',
       href: '/solutions',
-      ctaText: 'Explore All Hotel Solutions →',
+      ctaText: 'Explore Solutions Overview',
+      highlights: [
+        'Instant mobile check-in & keycard dispatch',
+        'Housekeeping & maintenance automated triage',
+        'Centralized multi-property tenant management',
+      ],
     },
     sections: [
       {
-        title: 'FOR HOTEL LEADERS',
+        title: 'BY HOTEL ROLE & TEAMS',
         items: [
           {
             label: 'Hotel Owners & Asset Managers',
@@ -161,32 +123,19 @@ export const navigationConfig = {
               'Orchestrate front-of-house, engineering, and housekeeping with automated dispatch.',
             icon: 'UsersIcon',
           },
-        ],
-      },
-      {
-        title: 'FOR OPERATIONAL TEAMS',
-        items: [
           {
             label: 'Front Desk & Reception',
             href: '/solutions/front-desk',
             description:
-              'Instant mobile check-in, key generation, and multilingual guest voice assistance.',
+              'Zero-wait check-in, key generation, and multilingual guest voice assistance.',
             icon: 'BoltIcon',
-            badge: 'Zero-Wait',
           },
           {
-            label: 'Housekeeping Supervisors',
+            label: 'Housekeeping & Operations',
             href: '/solutions/housekeeping',
             description:
               'Live mobile cleaning queues, priority room turnover & automated minibar checks.',
             icon: 'SparklesIcon',
-          },
-          {
-            label: 'F&B & Kitchen Chefs',
-            href: '/solutions/kitchen-fb',
-            description:
-              'Order pacing, dietary allergen filters, and digitized room service routing.',
-            icon: 'FireIcon',
           },
         ],
       },
@@ -196,8 +145,7 @@ export const navigationConfig = {
           {
             label: 'Boutique & Heritage Hotels',
             href: '/solutions/boutique-hotels',
-            description:
-              'Personalized high-touch concierge workflows tailored to luxury boutique guests.',
+            description: 'High-touch personalized concierge workflows tailored to boutique guests.',
             icon: 'HomeModernIcon',
           },
           {
@@ -213,7 +161,13 @@ export const navigationConfig = {
             description:
               'Centralized multi-property tenant management with unified enterprise SSO.',
             icon: 'BuildingOffice2Icon',
-            badge: 'Enterprise',
+          },
+          {
+            label: 'F&B, Kitchens & Room Service',
+            href: '/solutions/kitchen-fb',
+            description:
+              'Order pacing, dietary allergen filters, and digitized room service routing.',
+            icon: 'FireIcon',
           },
         ],
       },
@@ -256,7 +210,7 @@ export const navigationConfig = {
           {
             label: 'API Reference & Sandbox',
             href: '/docs',
-            description: 'Interactive REST API tester, webhooks, and sample Postman collections.',
+            description: 'Setup guides, webhooks, and technical specifications.',
             icon: 'CpuChipIcon',
             badge: 'v2.4 API',
           },
@@ -284,13 +238,6 @@ export const navigationConfig = {
             href: '/contact',
             description: 'Book a 20-minute tailored walkthrough and 14-day property trial.',
             icon: 'PhoneIcon',
-          },
-          {
-            label: 'Careers',
-            href: '/careers',
-            description: 'Join our distributed engineering and hospitality innovation team.',
-            icon: 'BriefcaseIcon',
-            badge: "We're Hiring",
           },
         ],
       },

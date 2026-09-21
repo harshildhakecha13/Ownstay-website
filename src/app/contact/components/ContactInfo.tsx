@@ -1,5 +1,6 @@
 import Icon from '@/components/ui/AppIcon';
 import Link from 'next/link';
+import { SOCIAL_LINKS } from '@/components/ui/SocialLinks';
 
 const benefits = [
   {
@@ -67,15 +68,41 @@ export default function ContactInfo() {
         </div>
       </div>
 
-      {/* Contact alternative */}
-      <div className="bg-card border border-border rounded-2xl p-6">
-        <p className="text-sm font-semibold text-foreground mb-2">Prefer to reach out directly?</p>
-        <Link
-          href="mailto:hello@ownthum.ai"
-          className="text-sm text-primary hover:underline font-medium"
-        >
-          hello@ownthum.ai
-        </Link>
+      {/* Contact alternative & Social Media */}
+      <div className="bg-card border border-border rounded-2xl p-6 space-y-4">
+        <div>
+          <p className="text-sm font-semibold text-foreground mb-1">
+            Need support or prefer to email us?
+          </p>
+          <Link
+            href="mailto:help@ownstayai.com"
+            className="text-sm text-primary hover:underline font-semibold inline-flex items-center gap-1.5"
+          >
+            <Icon name="EnvelopeIcon" size={16} />
+            help@ownstayai.com
+          </Link>
+        </div>
+
+        <div className="pt-3 border-t border-border/70">
+          <p className="text-xs font-semibold text-foreground mb-2.5">Official Social Channels</p>
+          <div className="grid grid-cols-3 gap-2">
+            {SOCIAL_LINKS.map((link) => {
+              const IconComp = link.icon;
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex flex-col items-center justify-center p-3 rounded-xl bg-secondary/80 border border-border/60 text-muted-foreground transition-all duration-200 text-center group hover:-translate-y-0.5 ${link.hoverClass}`}
+                >
+                  <IconComp className="w-4 h-4 mb-1 group-hover:scale-110 transition-transform" />
+                  <span className="text-[11px] font-semibold">{link.name}</span>
+                </a>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
