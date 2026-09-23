@@ -4,6 +4,7 @@ const isStaticExport = process.env.STATIC_EXPORT === 'true' || process.env.NEXT_
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || undefined,
   output: isStaticExport ? 'export' : undefined,
   productionBrowserSourceMaps: true,
   distDir: process.env.DIST_DIR || '.next',
