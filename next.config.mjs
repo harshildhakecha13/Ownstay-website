@@ -1,7 +1,10 @@
 import { imageHosts } from './image-hosts.config.mjs';
 
+const isStaticExport = process.env.STATIC_EXPORT === 'true' || process.env.NEXT_EXPORT === 'true';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: isStaticExport ? 'export' : undefined,
   productionBrowserSourceMaps: true,
   distDir: process.env.DIST_DIR || '.next',
   typescript: {
@@ -11,6 +14,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    unoptimized: isStaticExport,
     remotePatterns: imageHosts,
     minimumCacheTTL: 60,
     qualities: [75, 85, 100],

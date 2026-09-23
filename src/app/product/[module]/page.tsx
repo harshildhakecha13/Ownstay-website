@@ -1036,6 +1036,12 @@ export async function generateMetadata({
   };
 }
 
+export function generateStaticParams() {
+  return Object.keys(moduleData).map((module) => ({
+    module,
+  }));
+}
+
 export default async function ModulePage({ params }: { params: Promise<{ module: string }> }) {
   const { module } = await params;
   const data = moduleData[module];

@@ -28,6 +28,10 @@ export default function InteractiveProductSimulator({
     'English' | 'Spanish' | 'French' | 'Japanese' | 'Arabic'
   >('English');
 
+  const [selectedPms, setSelectedPms] = useState<
+    'Opera Cloud' | 'Amadeus' | 'Cloudbeds' | 'StayNTouch'
+  >('Opera Cloud');
+
   const isCrm =
     moduleTitle.toLowerCase().includes('crm') ||
     moduleTitle.toLowerCase().includes('messaging') ||

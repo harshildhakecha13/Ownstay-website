@@ -952,6 +952,12 @@ export async function generateMetadata({
   };
 }
 
+export function generateStaticParams() {
+  return Object.keys(solutionsData).map((slug) => ({
+    slug,
+  }));
+}
+
 export default async function SolutionDetailPage({
   params,
 }: {

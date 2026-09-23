@@ -1,5 +1,7 @@
 import type { MetadataRoute } from 'next';
 
+export const dynamic = 'force-static';
+
 function getBaseUrl(): string {
   const envUrl = process.env.NEXT_PUBLIC_SITE_URL;
   if (envUrl && (envUrl.startsWith('http://') || envUrl.startsWith('https://'))) {
